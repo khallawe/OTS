@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using OTS.Authentication;
+using System.Web;
 using System.Web.Mvc;
 
 namespace OTS
@@ -8,7 +9,7 @@ namespace OTS
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new AuthorizeAttribute());
+            //filters.Add(new AuthenticateAdminSession());
 
         }
     }

@@ -24,6 +24,12 @@ namespace OTS.BLL
             throw new NotImplementedException();
         }
 
+        public Model.User CheckLogin(string userName, string pasword)
+        {
+            Model.User user= dal.CheckLogin(userName, pasword);
+            return user;
+        }
+
         public int Delete(int id)
         {
             throw new NotImplementedException();

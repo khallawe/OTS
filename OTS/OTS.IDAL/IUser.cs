@@ -20,6 +20,7 @@ namespace OTS.IDAL
         #endregion
 
         List<User> SelectByGroup(Group group);
+        User CheckLogin(string userName, string pasword);
 
 
 

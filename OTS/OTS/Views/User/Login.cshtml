@@ -32,7 +32,8 @@
 
 <body class="focused-form">
 
-
+@using (Html.BeginForm("Login", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
     <div class="container" id="login-form">
         <a href="index.html" class="login-logo"><img src="http://placehold.it/300&text=Placeholder"></a>
         <div class="row">
@@ -48,7 +49,7 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </span>
-                                        <input type="text" class="form-control" placeholder="Email Username" data-parsley-minlength="6" placeholder="At least 6 characters" required>
+                                        <input type="text" class="form-control" placeholder="Email Username" name="userName" id="userName" data-parsley-minlength="6" placeholder="At least 6 characters" required>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +60,7 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-key"></i>
                                         </span>
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                                     </div>
                                 </div>
                             </div>
@@ -79,8 +80,7 @@
 
                             <div class="panel-footer">
                                 <div class="clearfix">
-                                    <a href="extras-registration.html" class="btn btn-default pull-left">Register</a>
-                                    <a href="extras-login.html" class="btn btn-primary pull-right">Login</a>
+                                    <input type="submit" value="Log in" class="btn btn-primary" />
                                 </div>
                             </div>
 
@@ -88,14 +88,11 @@
                     </div>
                 </div>
 
-                <div class="text-center">
-                    <a href="#" class="btn btn-label btn-social btn-facebook mb20"><i class="fa fa-fw fa-facebook"></i>Connect with Facebook</a>
-                    <a href="#" class="btn btn-label btn-social btn-twitter mb20"><i class="fa fa-fw fa-twitter"></i>Connect with Twitter</a>
-                </div>
+                
             </div>
         </div>
     </div>
-
+}
 
 
     <!-- Load site level scripts -->

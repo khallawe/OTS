@@ -16,6 +16,12 @@ namespace OTS.DAL
             throw new NotImplementedException();
         }
 
+        public Model.User CheckLogin(string userName, string pasword)
+        {
+            Model.User user = db.UserSet.FirstOrDefault(u => u.userName == userName && u.password == pasword);
+            return user;
+        }
+
         public int Delete(int id)
         {
             throw new NotImplementedException();

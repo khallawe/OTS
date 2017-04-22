@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace OTS.Controllers
 {
+
     [Authorize]
     public class HomeController : Controller
     {

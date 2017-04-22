@@ -153,8 +153,11 @@ namespace OTS.DAL.Migrations
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        Role_ID = c.Int(),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Role", t => t.Role_ID)
+                .Index(t => t.Role_ID);
             
             CreateTable(
                 "dbo.GradingCriteria",
@@ -170,24 +173,6 @@ namespace OTS.DAL.Migrations
                         ModifiedBy = c.Int(),
                     })
                 .PrimaryKey(t => t.ID);
-            
-            CreateTable(
-                "dbo.GroupRoles",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        CreatedDate = c.DateTime(nullable: false),
-                        CreatedBy = c.Int(nullable: false),
-                        ModifiedDate = c.DateTime(),
-                        ModifiedBy = c.Int(),
-                        group_ID = c.Int(),
-                        role_ID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Group", t => t.group_ID)
-                .ForeignKey("dbo.Role", t => t.role_ID)
-                .Index(t => t.group_ID)
-                .Index(t => t.role_ID);
             
             CreateTable(
                 "dbo.Role",
@@ -252,8 +237,7 @@ namespace OTS.DAL.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.GroupRoles", "role_ID", "dbo.Role");
-            DropForeignKey("dbo.GroupRoles", "group_ID", "dbo.Group");
+            DropForeignKey("dbo.Group", "Role_ID", "dbo.Role");
             DropForeignKey("dbo.ExamLog", "selectedAnswer_ID", "dbo.Answer");
             DropForeignKey("dbo.ExamLog", "question_ID", "dbo.Question");
             DropForeignKey("dbo.ExamLog", "exam_ID", "dbo.Exam");
@@ -270,8 +254,7 @@ namespace OTS.DAL.Migrations
             DropIndex("dbo.QuestionExam", new[] { "Question_ID" });
             DropIndex("dbo.SubInventoryExam", new[] { "Exam_ID" });
             DropIndex("dbo.SubInventoryExam", new[] { "SubInventory_ID" });
-            DropIndex("dbo.GroupRoles", new[] { "role_ID" });
-            DropIndex("dbo.GroupRoles", new[] { "group_ID" });
+            DropIndex("dbo.Group", new[] { "Role_ID" });
             DropIndex("dbo.User", new[] { "group_ID" });
             DropIndex("dbo.Answer", new[] { "question_ID" });
             DropIndex("dbo.Question", new[] { "subInventory_ID" });
@@ -284,7 +267,6 @@ namespace OTS.DAL.Migrations
             DropTable("dbo.SubInventoryExam");
             DropTable("dbo.Setting");
             DropTable("dbo.Role");
-            DropTable("dbo.GroupRoles");
             DropTable("dbo.GradingCriteria");
             DropTable("dbo.Group");
             DropTable("dbo.User");

@@ -1,4 +1,5 @@
-﻿using OTS.Model;
+﻿using OTS.Authentication;
+using OTS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ using System.Web.Security;
 
 namespace OTS.Controllers
 {
-    
+
+    [AuthenticateAdminSession]
     public class UserController : Controller
     {
         // GET: User
@@ -18,31 +20,11 @@ namespace OTS.Controllers
             List<User> users = BLL.User.Instance.SelectAll();
             return View(users);
         }
+        
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult Add()
         {
             return View();
         }
-        //
-        // POST: /Account/Login
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult Login(string userName, string password)
-        {
-            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
-            {
-
-                User user = BLL.User.Instance.CheckLogin(userName, password);
-                if (user.ID > 0)
-                {
-                    Session["user"] = user;
-                    FormsAuthentication.RedirectFromLoginPage(user.userName, false);
-                }
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View();
-        }
-
     }
 }

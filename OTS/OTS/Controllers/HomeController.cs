@@ -1,4 +1,5 @@
 ﻿using OTS.Authentication;
+using OTS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace OTS.Controllers
     {
         public ActionResult Index()
         {
+            User user = (User)Session["user"];
+            ViewBag.userName = user.name;
             return View();
         }
 

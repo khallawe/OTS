@@ -23,13 +23,13 @@ namespace OTS.Authentication
                     return;
 
                 //Redirect to login.
-                var redirectTarget = new RouteValueDictionary { { "action", "Login" }, { "controller", "User" } };
+                var redirectTarget = new RouteValueDictionary { { "action", "Login" }, { "controller", "Login" } };
                 filterContext.Result = new RedirectToRouteResult(redirectTarget);
             }
             catch (Exception)
             {
 
-                var redirectTarget = new RouteValueDictionary { { "action", "Login" }, { "controller", "User" } };
+                var redirectTarget = new RouteValueDictionary { { "action", "Login" }, { "controller", "Login" } };
                 filterContext.Result = new RedirectToRouteResult(redirectTarget);
 
             }

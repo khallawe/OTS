@@ -51,13 +51,19 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Group.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubInventory.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OTS.DALFactory\OTS.DALFactory.csproj">
       <Project>{5FFE483A-EF7B-4D0B-AE75-9484B8E2C174}</Project>
       <Name>OTS.DALFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OTS.DAL\OTS.DAL.csproj">
+      <Project>{b0f0cda1-1b46-4e55-a5f2-6c48c4a632ca}</Project>
+      <Name>OTS.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\OTS.Helper\OTS.Helper.csproj">
       <Project>{46a9ff87-44db-43fb-9fb6-76e5dc79efdc}</Project>

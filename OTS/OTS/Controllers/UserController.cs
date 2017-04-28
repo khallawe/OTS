@@ -42,7 +42,7 @@ namespace OTS.Controllers
                 // TODO: Add insert logic here
                 user.CreatedBy = ((User)Session["User"]).ID;
                 user.CreatedDate = DateTime.Now;
-                Group g = BLL.Group.Instance.SelectOne(1);
+                Group g = BLL.Group.Instance.SelectOne(3);
                 user.group = g;
                 if (ModelState.IsValid)
                 {

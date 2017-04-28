@@ -9,7 +9,8 @@ namespace OTS.Model
 {
     public class User : Base
     {
-
+        [Key]
+        public int ID { get; set; }
         [Required(ErrorMessage = "this field Required")]
         public string name { get; set; }
         [Required(ErrorMessage = "this field Required")]

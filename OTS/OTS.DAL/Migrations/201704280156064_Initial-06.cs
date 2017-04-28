@@ -3,7 +3,7 @@ namespace OTS.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initial_migration : DbMigration
+    public partial class Initial06 : DbMigration
     {
         public override void Up()
         {
@@ -12,11 +12,9 @@ namespace OTS.DAL.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
+                        UserID = c.Int(nullable: false),
                         errorMsg = c.String(),
                         CreatedDate = c.DateTime(nullable: false),
-                        CreatedBy = c.Int(nullable: false),
-                        ModifiedDate = c.DateTime(),
-                        ModifiedBy = c.Int(),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -64,24 +62,8 @@ namespace OTS.DAL.Migrations
                 "dbo.SubInventory",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
-                        name = c.String(),
-                        description = c.String(),
-                        CreatedDate = c.DateTime(nullable: false),
-                        CreatedBy = c.Int(nullable: false),
-                        ModifiedDate = c.DateTime(),
-                        ModifiedBy = c.Int(),
-                        inventory_ID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Inventory", t => t.inventory_ID)
-                .Index(t => t.inventory_ID);
-            
-            CreateTable(
-                "dbo.Inventory",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
+                        SubInventoryID = c.Int(nullable: false, identity: true),
+                        InventoryID = c.Int(nullable: false),
                         name = c.String(nullable: false),
                         description = c.String(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
@@ -89,7 +71,23 @@ namespace OTS.DAL.Migrations
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.SubInventoryID)
+                .ForeignKey("dbo.Inventory", t => t.InventoryID, cascadeDelete: true)
+                .Index(t => t.InventoryID);
+            
+            CreateTable(
+                "dbo.Inventory",
+                c => new
+                    {
+                        InventoryID = c.Int(nullable: false, identity: true),
+                        name = c.String(nullable: false),
+                        description = c.String(nullable: false),
+                        CreatedDate = c.DateTime(nullable: false),
+                        CreatedBy = c.Int(nullable: false),
+                        ModifiedDate = c.DateTime(),
+                        ModifiedBy = c.Int(),
+                    })
+                .PrimaryKey(t => t.InventoryID);
             
             CreateTable(
                 "dbo.Question",
@@ -102,11 +100,11 @@ namespace OTS.DAL.Migrations
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
-                        subInventory_ID = c.Int(),
+                        subInventory_SubInventoryID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.SubInventory", t => t.subInventory_ID)
-                .Index(t => t.subInventory_ID);
+                .ForeignKey("dbo.SubInventory", t => t.subInventory_SubInventoryID)
+                .Index(t => t.subInventory_SubInventoryID);
             
             CreateTable(
                 "dbo.Answer",
@@ -157,13 +155,12 @@ namespace OTS.DAL.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
-                "dbo.GradingCriteria",
+                "dbo.Role",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        minVal = c.Int(nullable: false),
-                        maxVal = c.Int(nullable: false),
-                        grade = c.String(),
+                        roleName = c.String(),
+                        roleDesc = c.String(),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
@@ -172,30 +169,13 @@ namespace OTS.DAL.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
-                "dbo.GroupRoles",
+                "dbo.GradingCriteria",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        CreatedDate = c.DateTime(nullable: false),
-                        CreatedBy = c.Int(nullable: false),
-                        ModifiedDate = c.DateTime(),
-                        ModifiedBy = c.Int(),
-                        group_ID = c.Int(),
-                        role_ID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Group", t => t.group_ID)
-                .ForeignKey("dbo.Role", t => t.role_ID)
-                .Index(t => t.group_ID)
-                .Index(t => t.role_ID);
-            
-            CreateTable(
-                "dbo.Role",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        roleName = c.String(),
-                        roleDesc = c.String(),
+                        minVal = c.Int(nullable: false),
+                        maxVal = c.Int(nullable: false),
+                        grade = c.String(),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
@@ -226,13 +206,13 @@ namespace OTS.DAL.Migrations
                 "dbo.SubInventoryExam",
                 c => new
                     {
-                        SubInventory_ID = c.Int(nullable: false),
+                        SubInventory_SubInventoryID = c.Int(nullable: false),
                         Exam_ID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.SubInventory_ID, t.Exam_ID })
-                .ForeignKey("dbo.SubInventory", t => t.SubInventory_ID, cascadeDelete: true)
+                .PrimaryKey(t => new { t.SubInventory_SubInventoryID, t.Exam_ID })
+                .ForeignKey("dbo.SubInventory", t => t.SubInventory_SubInventoryID, cascadeDelete: true)
                 .ForeignKey("dbo.Exam", t => t.Exam_ID, cascadeDelete: true)
-                .Index(t => t.SubInventory_ID)
+                .Index(t => t.SubInventory_SubInventoryID)
                 .Index(t => t.Exam_ID);
             
             CreateTable(
@@ -248,44 +228,57 @@ namespace OTS.DAL.Migrations
                 .Index(t => t.Question_ID)
                 .Index(t => t.Exam_ID);
             
+            CreateTable(
+                "dbo.RoleGroup",
+                c => new
+                    {
+                        Role_ID = c.Int(nullable: false),
+                        Group_ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Role_ID, t.Group_ID })
+                .ForeignKey("dbo.Role", t => t.Role_ID, cascadeDelete: true)
+                .ForeignKey("dbo.Group", t => t.Group_ID, cascadeDelete: true)
+                .Index(t => t.Role_ID)
+                .Index(t => t.Group_ID);
+            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.GroupRoles", "role_ID", "dbo.Role");
-            DropForeignKey("dbo.GroupRoles", "group_ID", "dbo.Group");
             DropForeignKey("dbo.ExamLog", "selectedAnswer_ID", "dbo.Answer");
             DropForeignKey("dbo.ExamLog", "question_ID", "dbo.Question");
             DropForeignKey("dbo.ExamLog", "exam_ID", "dbo.Exam");
             DropForeignKey("dbo.Exam", "user_ID", "dbo.User");
             DropForeignKey("dbo.User", "group_ID", "dbo.Group");
-            DropForeignKey("dbo.Question", "subInventory_ID", "dbo.SubInventory");
+            DropForeignKey("dbo.RoleGroup", "Group_ID", "dbo.Group");
+            DropForeignKey("dbo.RoleGroup", "Role_ID", "dbo.Role");
+            DropForeignKey("dbo.Question", "subInventory_SubInventoryID", "dbo.SubInventory");
             DropForeignKey("dbo.QuestionExam", "Exam_ID", "dbo.Exam");
             DropForeignKey("dbo.QuestionExam", "Question_ID", "dbo.Question");
             DropForeignKey("dbo.Answer", "question_ID", "dbo.Question");
-            DropForeignKey("dbo.SubInventory", "inventory_ID", "dbo.Inventory");
+            DropForeignKey("dbo.SubInventory", "InventoryID", "dbo.Inventory");
             DropForeignKey("dbo.SubInventoryExam", "Exam_ID", "dbo.Exam");
-            DropForeignKey("dbo.SubInventoryExam", "SubInventory_ID", "dbo.SubInventory");
+            DropForeignKey("dbo.SubInventoryExam", "SubInventory_SubInventoryID", "dbo.SubInventory");
+            DropIndex("dbo.RoleGroup", new[] { "Group_ID" });
+            DropIndex("dbo.RoleGroup", new[] { "Role_ID" });
             DropIndex("dbo.QuestionExam", new[] { "Exam_ID" });
             DropIndex("dbo.QuestionExam", new[] { "Question_ID" });
             DropIndex("dbo.SubInventoryExam", new[] { "Exam_ID" });
-            DropIndex("dbo.SubInventoryExam", new[] { "SubInventory_ID" });
-            DropIndex("dbo.GroupRoles", new[] { "role_ID" });
-            DropIndex("dbo.GroupRoles", new[] { "group_ID" });
+            DropIndex("dbo.SubInventoryExam", new[] { "SubInventory_SubInventoryID" });
             DropIndex("dbo.User", new[] { "group_ID" });
             DropIndex("dbo.Answer", new[] { "question_ID" });
-            DropIndex("dbo.Question", new[] { "subInventory_ID" });
-            DropIndex("dbo.SubInventory", new[] { "inventory_ID" });
+            DropIndex("dbo.Question", new[] { "subInventory_SubInventoryID" });
+            DropIndex("dbo.SubInventory", new[] { "InventoryID" });
             DropIndex("dbo.Exam", new[] { "user_ID" });
             DropIndex("dbo.ExamLog", new[] { "selectedAnswer_ID" });
             DropIndex("dbo.ExamLog", new[] { "question_ID" });
             DropIndex("dbo.ExamLog", new[] { "exam_ID" });
+            DropTable("dbo.RoleGroup");
             DropTable("dbo.QuestionExam");
             DropTable("dbo.SubInventoryExam");
             DropTable("dbo.Setting");
-            DropTable("dbo.Role");
-            DropTable("dbo.GroupRoles");
             DropTable("dbo.GradingCriteria");
+            DropTable("dbo.Role");
             DropTable("dbo.Group");
             DropTable("dbo.User");
             DropTable("dbo.Answer");

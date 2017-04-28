@@ -7081,7 +7081,7 @@ body {
 }
 .navbar-fixed-top + #wrapper,
 .navbar-fixed-top + #layout-fixed {
-  padding-top: 48px !important;
+  padding-top: 25px !important;
 }
 .navbar-fixed-top {
   width: 100%;

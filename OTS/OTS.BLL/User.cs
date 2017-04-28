@@ -53,10 +53,7 @@ namespace OTS.BLL
             throw new NotImplementedException();
         }
 
-        public List<Model.User> SelectByGroup(Group group)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public Model.User SelectOne(int id)
         {

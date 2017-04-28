@@ -1,0 +1,80 @@
+﻿@model IEnumerable<OTS.Model.Inventory>
+@using OTS.Model
+
+@{
+    ViewBag.Title = "Category List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cataogry List</h2>
+
+<p>
+    @Html.ActionLink("Add New Category", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    using (Html.BeginForm("Delete", "Inventory", new { id = item.InventoryID }))
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            
+                <a href="@Url.Action("Edit")/@item.InventoryID" id="@item.InventoryID">
+                    <img src="@Url.Content("~/assets/images/edit1.png")" width="35" height="30" />
+                </a>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.ID })*@ |
+                @*@Html.ActionLink("Details", "Details", new { id=item.ID })*@
+                @*@Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
+        
+            
+            
+              @*<input type="image"  src="~/assets/images/delete1.png" border="0" alt="Delete" width="35" height="30" value="delete" onclick="return confirm('Are You Sure?!');" />*@
+                <input type="submit" value="delete" onclick="return confirm('Are You Sure?!');"/>
+          
+
+        </td>
+    </tr>
+}
+}
+
+</table>

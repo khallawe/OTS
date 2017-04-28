@@ -9,6 +9,6 @@ namespace OTS.Model
     public class Group: Base
     {
         public string groupName { get; set; }
-        List<Role> roles { get; set; }
+        public List<Role> roles { get; set; }
     }
 }

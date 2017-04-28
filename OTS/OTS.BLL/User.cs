@@ -19,10 +19,13 @@ namespace OTS.BLL
         /// </summary>
         public static User Instance { get { User Instance = new User(); return Instance; } }
 
-        public int Add(IUser user)
+        public int Add(Model.User user)
         {
-            throw new NotImplementedException();
+            return dal.Add(user);
+            
         }
+
+        
 
         public Model.User CheckLogin(string userName, string pasword)
         {
@@ -32,7 +35,7 @@ namespace OTS.BLL
 
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+            return dal.Delete(id);
         }
 
         public List<Model.User> Search(string key)
@@ -45,6 +48,11 @@ namespace OTS.BLL
            return dal.SelectAll();
         }
 
+        public List<Model.User> SelectByGroup(Model.Group group)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Model.User> SelectByGroup(Group group)
         {
             throw new NotImplementedException();
@@ -52,12 +60,14 @@ namespace OTS.BLL
 
         public Model.User SelectOne(int id)
         {
-            throw new NotImplementedException();
+            return dal.SelectOne(id);
         }
 
-        public int Update(IUser user)
+        public int Update(Model.User user)
         {
-            throw new NotImplementedException();
+            return dal.Update(user);
         }
+
+        
     }
 }

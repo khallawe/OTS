@@ -9,7 +9,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace OTS.DAL
 {
-    class OTSContext : DbContext
+    public class OTSContext : DbContext
     {
         public OTSContext() : base("OTS")
         {
@@ -42,6 +42,11 @@ namespace OTS.DAL
         {
             modeBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
+        }
+
+        internal void Entry(object groupSet)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -20,7 +20,11 @@ namespace OTS.Authentication
                 var session = filterContext.HttpContext.Session;
                 var userSession = session["User"] as User;
                 if (userSession.ID > 0)
-                    return;
+                {
+                    session["Name"] = userSession.name;
+                        return;
+                }
+                    
 
                 //Redirect to login.
                 var redirectTarget = new RouteValueDictionary { { "action", "Login" }, { "controller", "Login" } };

@@ -1,5 +1,4 @@
-﻿@using OTS.Model
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -37,7 +36,7 @@
     <link type="text/css" href="/assets/plugins/form-daterangepicker/daterangepicker-bs3.css" rel="stylesheet"> 	<!-- DateRangePicker -->
     <link type="text/css" href="/assets/plugins/fullcalendar/fullcalendar.css" rel="stylesheet"> 					<!-- FullCalendar -->
     <link type="text/css" href="/assets/plugins/charts-chartistjs/chartist.min.css" rel="stylesheet"> 				<!-- Chartist -->
-
+    @Scripts.Render("~/bundles/jquery");
 </head>
 
 <body class="infobar-offcanvas">
@@ -130,8 +129,10 @@
                 <li class="dropdown" id="widget-classicmenu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="@Url.Action("Add", "User")">Add User</a></li>
+                        <li><a href="@Url.Action("Create", "User")">Add User</a></li>
                         <li><a href="@Url.Action("Index", "User")">View Users</a></li>
+                        <li class="divider"></li>
+                        <li><a href="@Url.Action("Index", "Group")">View Groups</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Questions</a></li>
                         <li><a href="#">Answers</a></li>
@@ -351,7 +352,7 @@
                                     </div>
                                     <div class="tabular-cell welcome-options">
                                         <span class="welcome-text">Welcome,</span>
-                                        <a href="#" class="name">@ViewBag.userName</a>
+                                        <a href="#" class="name">@Session["Name"].ToString()</a>
                                     </div>
                                 </div>
                             </div>

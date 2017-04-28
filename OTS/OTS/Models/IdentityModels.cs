@@ -29,5 +29,7 @@ namespace OTS.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<OTS.Model.Group> Groups { get; set; }
     }
 }

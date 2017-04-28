@@ -23,13 +23,21 @@ namespace OTS.Controllers
         {
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
-
-                User user = BLL.User.Instance.CheckLogin(userName, password);
-                if (user.ID > 0)
+                try
                 {
-                    Session["user"] = user;
+                    User user = BLL.User.Instance.CheckLogin(userName, password);
+                    if (user.ID > 0)
+                    {
+                        Session["user"] = user;
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
-                return RedirectToAction("Index", "Home");
+                catch (Exception)
+                {
+
+                    return View();
+                }
+                
             }
 
             return View();

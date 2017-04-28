@@ -11,8 +11,8 @@ namespace OTS.IDAL
     {
        #region basic Method
 
-        int Add(IUser user);
-        int Update(IUser user);
+        int Add(User user);
+        int Update(User user);
         int Delete(int id);
         User SelectOne(int id);
         List<User> Search(string key);

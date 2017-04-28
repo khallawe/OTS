@@ -11,10 +11,34 @@ namespace OTS.DAL
     public class User : IUser
     {
         OTSContext db = new OTSContext();
-        public int Add(IUser user)
+
+        public int Add(Model.User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var existUser = db.UserSet.Count(x => x.userName == user.userName);
+                if (existUser == 0)
+                {
+                    db.UserSet.Add(user);
+                    db.SaveChanges();
+                    return user.ID;
+                }
+                else
+                {
+                    return -1;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+            
         }
+
+       
 
         public Model.User CheckLogin(string userName, string pasword)
         {
@@ -24,12 +48,15 @@ namespace OTS.DAL
 
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+            Model.User user =db.UserSet.FirstOrDefault(x => x.ID == id);
+            db.UserSet.Remove(user);
+            return db.SaveChanges();
         }
 
         public List<Model.User> Search(string key)
         {
-            throw new NotImplementedException();
+            var users = from u in db.UserSet where u.name.ToLower().Contains(key.ToLower()) select u;
+            return users.ToList();
         }
 
         public List<Model.User> SelectAll()
@@ -39,19 +66,38 @@ namespace OTS.DAL
 
         }
 
-        public List<Model.User> SelectByGroup(Group group)
+        public List<Model.User> SelectByGroup(Model.Group _group)
         {
+            //var users = from u in db.UserSet where 
+            //List<Model.User> users = db.UserSet.
             throw new NotImplementedException();
         }
+
+        
 
         public Model.User SelectOne(int id)
         {
-            throw new NotImplementedException();
+            return  db.UserSet.FirstOrDefault(x => x.ID == id);
         }
 
-        public int Update(IUser user)
+        public int Update(Model.User user)
         {
-            throw new NotImplementedException();
+            Model.User olduser = db.UserSet.FirstOrDefault(x => x.ID == user.ID);
+            if (user.userName!= olduser.userName)
+            {
+                return -1;
+            }
+            olduser.name = user.name;
+            olduser.userName = user.userName;
+            olduser.password = user.password;
+            olduser.ModifiedDate = user.ModifiedDate;
+            olduser.ModifiedBy = user.ModifiedBy;
+            olduser.group = user.group;
+            return db.SaveChanges();
+
+            
         }
+
+        
     }
 }

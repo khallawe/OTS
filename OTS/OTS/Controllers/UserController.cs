@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OTS.Helper;
 
 namespace OTS.Controllers
 {
@@ -16,9 +17,10 @@ namespace OTS.Controllers
         public ActionResult Index()
         {
             List<Model.User> users = BLL.User.Instance.SelectAll();
+            
             return View(users);
         }
-
+        
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
@@ -29,7 +31,7 @@ namespace OTS.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
-            TempData["Groups"] = new SelectList(BLL.Group.Instance.getGroupsDbSet(), "ID", "groupName");
+            TempData["Groups"] = new SelectList(BLL.Group.Instance.getGroupsDbSet(), "Group_ID", "groupName");
             return View();
         }
 
@@ -39,11 +41,10 @@ namespace OTS.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                string pass = user.password;
+                user.password = CCrypt.Encrypt(pass);
                 user.CreatedBy = ((User)Session["User"]).ID;
                 user.CreatedDate = DateTime.Now;
-                Group g = BLL.Group.Instance.SelectOne(3);
-                user.group = g;
                 if (ModelState.IsValid)
                 {
                     int res =BLL.User.Instance.Add(user);
@@ -71,7 +72,10 @@ namespace OTS.Controllers
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
+
             Model.User user = BLL.User.Instance.SelectOne(id);
+            user.password = CCrypt.Decrypt(user.password);
+            TempData["Groups"] = new SelectList(BLL.Group.Instance.getGroupsDbSet(), "Group_ID", "groupName",user.Group_ID);
             return View(user);
         }
 
@@ -83,7 +87,7 @@ namespace OTS.Controllers
             {
                 user.ModifiedBy = ((Model.User)Session["User"]).ID;
                 user.ModifiedDate = DateTime.Now;
-                
+                user.password = CCrypt.Encrypt(user.password);
 
                 if (ModelState.IsValid)
                 {
@@ -134,5 +138,10 @@ namespace OTS.Controllers
             }
         }
         
+        public void sendEmail()
+        {
+            SMTP email = new SMTP();
+            email.SendEmail("mabuhussein03@gmail.com", "msg title", "msg contant");
+        }
     }
 }

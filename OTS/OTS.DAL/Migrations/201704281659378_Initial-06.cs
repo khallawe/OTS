@@ -131,28 +131,28 @@ namespace OTS.DAL.Migrations
                         name = c.String(nullable: false),
                         userName = c.String(nullable: false),
                         password = c.String(nullable: false, maxLength: 100),
+                        Group_ID = c.Int(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
-                        group_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Group", t => t.group_ID)
-                .Index(t => t.group_ID);
+                .ForeignKey("dbo.Group", t => t.Group_ID, cascadeDelete: true)
+                .Index(t => t.Group_ID);
             
             CreateTable(
                 "dbo.Group",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
+                        Group_ID = c.Int(nullable: false, identity: true),
                         groupName = c.String(),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.Group_ID);
             
             CreateTable(
                 "dbo.Role",
@@ -233,13 +233,13 @@ namespace OTS.DAL.Migrations
                 c => new
                     {
                         Role_ID = c.Int(nullable: false),
-                        Group_ID = c.Int(nullable: false),
+                        Group_Group_ID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Role_ID, t.Group_ID })
+                .PrimaryKey(t => new { t.Role_ID, t.Group_Group_ID })
                 .ForeignKey("dbo.Role", t => t.Role_ID, cascadeDelete: true)
-                .ForeignKey("dbo.Group", t => t.Group_ID, cascadeDelete: true)
+                .ForeignKey("dbo.Group", t => t.Group_Group_ID, cascadeDelete: true)
                 .Index(t => t.Role_ID)
-                .Index(t => t.Group_ID);
+                .Index(t => t.Group_Group_ID);
             
         }
         
@@ -249,8 +249,8 @@ namespace OTS.DAL.Migrations
             DropForeignKey("dbo.ExamLog", "question_ID", "dbo.Question");
             DropForeignKey("dbo.ExamLog", "exam_ID", "dbo.Exam");
             DropForeignKey("dbo.Exam", "user_ID", "dbo.User");
-            DropForeignKey("dbo.User", "group_ID", "dbo.Group");
-            DropForeignKey("dbo.RoleGroup", "Group_ID", "dbo.Group");
+            DropForeignKey("dbo.User", "Group_ID", "dbo.Group");
+            DropForeignKey("dbo.RoleGroup", "Group_Group_ID", "dbo.Group");
             DropForeignKey("dbo.RoleGroup", "Role_ID", "dbo.Role");
             DropForeignKey("dbo.Question", "subInventory_SubInventoryID", "dbo.SubInventory");
             DropForeignKey("dbo.QuestionExam", "Exam_ID", "dbo.Exam");
@@ -259,13 +259,13 @@ namespace OTS.DAL.Migrations
             DropForeignKey("dbo.SubInventory", "InventoryID", "dbo.Inventory");
             DropForeignKey("dbo.SubInventoryExam", "Exam_ID", "dbo.Exam");
             DropForeignKey("dbo.SubInventoryExam", "SubInventory_SubInventoryID", "dbo.SubInventory");
-            DropIndex("dbo.RoleGroup", new[] { "Group_ID" });
+            DropIndex("dbo.RoleGroup", new[] { "Group_Group_ID" });
             DropIndex("dbo.RoleGroup", new[] { "Role_ID" });
             DropIndex("dbo.QuestionExam", new[] { "Exam_ID" });
             DropIndex("dbo.QuestionExam", new[] { "Question_ID" });
             DropIndex("dbo.SubInventoryExam", new[] { "Exam_ID" });
             DropIndex("dbo.SubInventoryExam", new[] { "SubInventory_SubInventoryID" });
-            DropIndex("dbo.User", new[] { "group_ID" });
+            DropIndex("dbo.User", new[] { "Group_ID" });
             DropIndex("dbo.Answer", new[] { "question_ID" });
             DropIndex("dbo.Question", new[] { "subInventory_SubInventoryID" });
             DropIndex("dbo.SubInventory", new[] { "InventoryID" });

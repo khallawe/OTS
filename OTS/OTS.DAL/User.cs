@@ -68,9 +68,8 @@ namespace OTS.DAL
 
         public List<Model.User> SelectByGroup(Model.Group _group)
         {
-            //var users = from u in db.UserSet where 
-            //List<Model.User> users = db.UserSet.
-            throw new NotImplementedException();
+            
+            return db.UserSet.Where(x => x.Group_ID == _group.Group_ID).ToList();
         }
 
         

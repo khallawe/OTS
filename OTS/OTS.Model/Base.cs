@@ -19,6 +19,7 @@ namespace OTS.Model
         /// Get CreatedBy
         /// </summary>
         public int CreatedBy { get; set; }
+        
 
         /// <summary>
         /// Get ModifiedDate

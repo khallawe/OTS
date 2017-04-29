@@ -45,18 +45,17 @@
                 @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
             </div>
         </div>
+        @*To Get Group List*@
         <div class="form-group">
-            <label>
-                Group
-            </label>
+            @Html.LabelFor(model => model.Group_ID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownListFor(model => model.group.ID, (SelectList)(ViewBag.Groups), "Select Category", new { @class = "form-control" })*@
-                @Html.DropDownList("Groups",(SelectList)TempData["Groups"])
-              
-                @*@Html.ValidationMessageFor(model => model.group.ID, "", new { @class = "text-danger" })*@
+                @Html.DropDownListFor(model => model.Group_ID, (SelectList)(TempData["Groups"]), "Select Category", new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.Group_ID, "", new { @class = "text-danger" })
             </div>
 
         </div>
+
+       
 
 
         <div class="form-group">

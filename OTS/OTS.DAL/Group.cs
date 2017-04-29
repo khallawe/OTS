@@ -24,7 +24,7 @@ namespace OTS.DAL
                 {
                     db.GroupSet.Add(group);
                     db.SaveChanges();
-                    return group.ID;
+                    return group.Group_ID;
 
                 }
                 else
@@ -45,7 +45,7 @@ namespace OTS.DAL
 
         public int Delete(int id)
         {
-            Model.Group group = db.GroupSet.FirstOrDefault(x => x.ID == id);
+            Model.Group group = db.GroupSet.FirstOrDefault(x => x.Group_ID == id);
             db.GroupSet.Remove(group);
             return db.SaveChanges();
            // return 1;
@@ -64,7 +64,7 @@ namespace OTS.DAL
 
         public Model.Group SelectOne(int id)
         {
-            Model.Group group = db.GroupSet.First(x => x.ID == id);
+            Model.Group group = db.GroupSet.First(x => x.Group_ID == id);
             return group;
         }
         public IDbSet<Model.Group> getGroupsDbSet()
@@ -75,7 +75,7 @@ namespace OTS.DAL
         {
             
           
-                Model.Group oldGroup = db.GroupSet.FirstOrDefault(x => x.ID == group.ID);
+                Model.Group oldGroup = db.GroupSet.FirstOrDefault(x => x.Group_ID == group.Group_ID);
                 oldGroup.groupName = group.groupName;
                 oldGroup.ModifiedDate = group.ModifiedDate;
                 oldGroup.ModifiedBy = group.ModifiedBy;

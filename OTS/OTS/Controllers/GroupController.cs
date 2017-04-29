@@ -95,7 +95,7 @@ namespace OTS.Controllers
         [HttpPost]
         public ActionResult Delete(Group group)
         {
-            int res = BLL.Group.Instance.Delete(group.ID);
+            int res = BLL.Group.Instance.Delete(group.Group_ID);
             return RedirectToAction("Index");
         }
         [HttpGet]

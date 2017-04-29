@@ -213,6 +213,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SubInventoryController.cs" />
+    <Compile Include="Controllers\textController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -295,12 +296,18 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\SubInventory\Create.cshtml" />
+    <Content Include="Views\SubInventory\Delete.cshtml" />
+    <Content Include="Views\SubInventory\Details.cshtml" />
+    <Content Include="Views\SubInventory\Edit.cshtml" />
+    <Content Include="Views\SubInventory\Index.cshtml" />
+    <Content Include="Views\text\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\" />
     <Folder Include="Views\Inventory\" />
-    <Folder Include="Views\SubInventory\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

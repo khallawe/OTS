@@ -1,4 +1,5 @@
-﻿using OTS.Model;
+﻿using OTS.Helper;
+using OTS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace OTS.Controllers
             {
                 try
                 {
+                    password = CCrypt.Encrypt(password);
                     User user = BLL.User.Instance.CheckLogin(userName, password);
                     if (user.ID > 0)
                     {

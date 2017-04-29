@@ -118,7 +118,6 @@ namespace OTS.Controllers
         {
             try
             {
-               // OTSContext db = new OTSContext();
                 SubInventory subInventory = BLL.SubInventory.Instance.SelectOne(id);
                 TempData["InventoryIDEdit"] = new SelectList(BLL.Inventory.Instance.getDbSet(), "InventoryID", "name", subInventory.InventoryID);
 

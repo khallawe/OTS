@@ -10,8 +10,9 @@ namespace OTS.Model
     public class Group: Base
     {
         [Key]
-        public int ID { get; set; }
+        public int Group_ID { get; set; }
         public string groupName { get; set; }
         public List<Role> roles { get; set; }
+        public virtual List<User> users { get; set; }
     }
 }

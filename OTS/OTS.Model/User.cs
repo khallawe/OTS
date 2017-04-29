@@ -22,7 +22,9 @@ namespace OTS.Model
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string password { get; set; }
-        public Group group { get; set; }
+        public virtual Group group { get; set; }
+        public int Group_ID { get; set; }
+        
 
     }
 }

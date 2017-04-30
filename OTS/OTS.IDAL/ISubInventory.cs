@@ -20,7 +20,7 @@ namespace OTS.IDAL
         List<SubInventory> SelectBySubInventory(int inventoryId);
         List<SubInventory> SelectBySubExamAccessCode(string examAccessCode);
         List<SubInventory> SelectBySubExamID(int examId);
-
+        List<Model.SubInventory> SelectByInventory(int inventoryId);
 
     }
 }

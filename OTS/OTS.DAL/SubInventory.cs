@@ -85,5 +85,10 @@ namespace OTS.DAL
         {
             return db.SubInventorySet;
         }
+
+        public List<Model.SubInventory> SelectByInventory(int inventoryId)
+        {
+            return db.SubInventorySet.Where(si => si.InventoryID == inventoryId).ToList();
+        }
     }
 }

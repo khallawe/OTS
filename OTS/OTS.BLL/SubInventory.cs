@@ -44,6 +44,11 @@ namespace OTS.BLL
             return dal.SelectAll();
         }
 
+        public List<Model.SubInventory> SelectByInventory(int inventoryId)
+        {
+            return dal.SelectByInventory(inventoryId);
+        }
+
         public List<Model.SubInventory> SelectBySubExamAccessCode(string examAccessCode)
         {
             throw new NotImplementedException();

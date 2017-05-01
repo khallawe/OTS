@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace OTS.IDAL
 {
-    public interface IQuestion
+   public interface IQuestion
     {
-        int Add(Question question);
-        int Update(Question question);
+        int Add(IQuestion question);
+        int Update(IQuestion question);
         int Delete(int id);
         Question SelectOne(int id);
         List<Question> SelectAll();   

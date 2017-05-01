@@ -9,14 +9,14 @@ namespace OTS.Model
     public class Setting: Base
     {
         [Key]
-        public int ID { get; set; }
-        public int examTime { get; set; }
-        public int maxQuestionsInSubInventories { get; set; }
-        public int minSubInventories { get; set; }
-        public int maxSubInventories { get; set; }  
-        public int randomLength { get; set; }
-        public int questionGrades { get; set; }
-        public int validTimeAccess { get; set; }
+        public int SettingID { get; set; }
+        public int ExamTime { get; set; }
+        public int MaxQuestionsInSubInventories { get; set; }
+        public int MinSubInventories { get; set; }
+        public int MaxSubInventories { get; set; }  
+        public int RandomLength { get; set; }
+        public int QuestionGrades { get; set; }
+        public int ValidTimeAccess { get; set; }
 
     }
 }

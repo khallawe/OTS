@@ -1,15 +1,15 @@
-﻿using OTS.IDAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OTS.IDAL;
 using OTS.Model;
 using OTS.DALFactory;
 
 namespace OTS.BLL
 {
-    public class Question : IQuestion
+   public class Question : IQuestion
     {
         private static readonly IQuestion dal = DataAccess.CreateInstance<IQuestion>("Question");
 
@@ -18,14 +18,14 @@ namespace OTS.BLL
         /// </summary>
         public static Question Instance { get { Question Instance = new Question(); return Instance; } }
 
-        public int Add(Model.Question question)
+        public int Add(IQuestion question)
         {
-            return dal.Add(question);
+            throw new NotImplementedException();
         }
 
         public int Delete(int id)
         {
-            return dal.Delete(id);
+            throw new NotImplementedException();
         }
 
         public List<Model.Question> Search(string key)
@@ -50,12 +50,12 @@ namespace OTS.BLL
 
         public Model.Question SelectOne(int id)
         {
-            return dal.SelectOne(id);
+            throw new NotImplementedException();
         }
 
-        public int Update(Model.Question question)
+        public int Update(IQuestion question)
         {
-            return dal.Update(question);
+            throw new NotImplementedException();
         }
     }
 }

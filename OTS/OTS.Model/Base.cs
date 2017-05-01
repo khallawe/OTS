@@ -30,5 +30,7 @@ namespace OTS.Model
         /// Get ModifiedBy
         /// </summary>
         public int? ModifiedBy { get; set; }
+
+        public bool IsActive { get; set; } = true;
     }
 }

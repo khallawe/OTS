@@ -49,13 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Answer.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="ErrorLog.cs" />
     <Compile Include="GradingCriteria.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
+    <Compile Include="Setting.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="SubInventory.cs" />
     <Compile Include="User.cs" />

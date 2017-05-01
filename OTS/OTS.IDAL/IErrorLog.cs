@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace OTS.IDAL
 {
-    interface IErrorLog
+    public interface IErrorLog
     {
-        int Add(IErrorLog error);
+        int Add(ErrorLog error);
         List<ErrorLog> Search(string key);
         List<ErrorLog> SelectAll();
 

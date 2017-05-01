@@ -9,9 +9,9 @@ namespace OTS.Model
     {
         [Key]
         public int AnswerID { get; set; }
-        public string answer { get; set; }
+        public string AnswerText { get; set; }
         public int QuestionID { get; set; }
-        public Question question { get; set; }
-        public bool isCorrect { get; set; }
+        public virtual Question question { get; set; }
+        public bool IsCorrect { get; set; }
     }
 }

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<OTS.Model.Setting>
+
+@{
+    ViewBag.Title = "Setting";
+}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-default" id="panel-inline">
+                <div class="panel-heading">
+                    <h2>System Setting</h2>
+                    <div class="panel-ctrls"></div>
+                </div>
+                <div class="panel-body panel-no-padding">
+
+                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" id="editable">
+                        <thead>
+                            <tr>
+                                <th>Exam Time</th>
+                                <th>Max Questions In SubInventories</th>
+                                <th>Min SubInventories</th>
+                                <th>Max SubInventories</th>
+                                <th>Test Random Length</th>
+                                <th>Question Grades</th>
+                                <th>Exam Valid Time Access</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ExamTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaxQuestionsInSubInventories)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MinSubInventories)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaxSubInventories)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RandomLength)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.QuestionGrades)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ValidTimeAccess)
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.SettingID }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.SettingID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.SettingID })
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table><!--end table-->
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+

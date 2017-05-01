@@ -44,6 +44,20 @@ namespace OTS.Controllers
 
             return View();
         }
+        [HttpGet]
+        public ActionResult LogOut()
+        {
+            try
+            {
+                Session["User"] = null;
+                return RedirectToAction("Login");
+            }
+            catch (Exception)
+            {
 
+                return RedirectToAction("Login");
+            }
+           
+        }
     }
 }

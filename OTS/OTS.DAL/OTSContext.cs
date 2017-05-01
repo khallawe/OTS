@@ -14,6 +14,8 @@ namespace OTS.DAL
         public OTSContext() : base("OTS")
         {
             Database.SetInitializer<OTSContext>(null);
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
         }
 
         #region

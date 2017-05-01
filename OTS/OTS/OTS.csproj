@@ -212,11 +212,14 @@
     <Compile Include="Controllers\GradingCriteriaController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryAPIController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SubInventoryAPIController.cs" />
     <Compile Include="Controllers\SubInventoryController.cs" />
     <Compile Include="Controllers\textController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -309,9 +312,6 @@
     <Content Include="Views\SubInventory\Index.cshtml" />
     <Content Include="Views\text\Index.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
-    <Content Include="Views\Question\Create.cshtml" />
-    <Content Include="Views\Question\Edit.cshtml" />
-    <Content Include="Views\Question\Index.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
@@ -326,6 +326,10 @@
     <Content Include="Views\GradingCriteria\Index.cshtml" />
     <Content Include="Views\GradingCriteria\Details.cshtml" />
     <Content Include="Views\GradingCriteria\Delete.cshtml" />
+    <Content Include="Views\Setting\Edit.cshtml" />
+    <Content Include="Views\Setting\Index.cshtml" />
+    <Content Include="Views\Questions\Add.cshtml" />
+    <Content Include="Views\Questions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

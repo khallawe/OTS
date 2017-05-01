@@ -10,12 +10,12 @@ namespace OTS.Model
     {
         [Key]
         public int QuestionID { get; set; }
-        public string question { get; set; }
-        public SubInventory subInventory { get; set; }
+        public string QuestionText { get; set; }
+        public virtual SubInventory SubInventory { get; set; }
         public int SubInventoryID { get; set; }
-        public int numberOfAnswers { get; set; }
-        public List<Answer> answers { get; set; }
-        public List<Exam> exams { get; set; }
+       // public int numberOfAnswers { get; set; }
+        public virtual List<Answer> Answers { get; set; }
+        public virtual List<Exam> Exams { get; set; }
 
 
     }

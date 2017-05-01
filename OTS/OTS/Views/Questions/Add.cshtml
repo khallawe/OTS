@@ -1,0 +1,294 @@
+﻿@model OTS.Model.SubInventory
+
+@{
+    ViewBag.Title = "Create";
+
+}
+
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<style>
+    .answer-text {
+        width: 50%;
+    }
+
+    .answer-delete {
+        width: 20%;
+    }
+
+    select {
+        width: 20%;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="panel panel-default" data-widget='{"draggable": "false"}'>
+    <div class="panel-heading">
+        <h2>Create SubInventory Form</h2>
+        <div class="panel-ctrls"
+             data-actions-container=""
+             data-action-collapse='{"target": ".panel-body"}'
+             data-action-expand=''
+             data-action-colorpicker=''>
+        </div>
+    </div>
+    <div class="panel-editbox" data-widget-controls=""></div>
+    <div class="panel-body">
+
+       
+            
+
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Inventory</label>
+                    <div class="col-md-10">
+                        <select id="inventorySelect"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">SubInventory</label>
+                    <div class="col-md-10">
+                        <select id="subInventorySelect"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Question</label>
+                    <div class="col-md-10">
+                        @Html.TextArea("QuestionText", null, new { cols = 40, @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Answer</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("AnswerText", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <input type="button" id="btnAddAnswer" class="btn btn-primary" value="Add Answer" />
+                </div>
+
+                <table id="tblAnswers" class="table table-bordered table-striped" style="margin-top: 50px; width: 50%;">
+                    <thead id="tblHeader">
+                    </thead>
+                </table>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <input type="button" class="btn btn-primary" id="btnSave" value="Save" />
+                            @Html.ActionLink("Cancel", "Index", "SubInventory", null, new { @class = "btn-default btn" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+
+
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+<script type="text/javascript">
+    var count = 0;
+    $(function () {
+        var inventoryDDL = $("#inventorySelect");
+        var subInventoryDDl = $("#subInventorySelect");;
+        $.ajax({
+            url: '/api/InventoryAPI',
+            method: 'GET',
+            dataType: 'JSON',
+            contentType: "application/json; charset=utf-8;",
+            success: function (data) {
+               // $("#inventoryData").html("");
+                inventoryDDL.append($('<option></option>').val(-1).html('Select Category'));
+                subInventoryDDl.append($('<option></option>').val(-1).html('Select SubCategory'));
+                subInventoryDDl.prop('disabled',true);
+                $.each(data, function (index, item) {
+                    inventoryDDL.append(
+                        $('<option></option>').val(item.InventoryID).html(item.name));
+                });
+            },
+            error: function (x, status, error) {
+                alert(error);
+            }
+        })
+
+        inventoryDDL.change(function () {
+            if ($(this).val() == "-1") {
+                subInventoryDDl.empty();
+                subInventoryDDl.append($('<option></option>').val(-1).html('Select SubCategory'));
+                subInventoryDDl.val(-1)
+                subInventoryDDl.prop('disabled', true);
+            }
+            else
+            {
+                $.ajax({
+                    url: '/api/SubInventoryAPI',
+                    data: { id: $(this).val() },
+                    method: 'GET',
+                    dataType: 'JSON',
+                    contentType: "application/json; charset=utf-8;",
+                    success: function (data) {
+                        // $("#inventoryData").html("");
+                        subInventoryDDl.empty();
+                        subInventoryDDl.append($('<option></option>').val(-1).html('Select SubCategory'));
+                        subInventoryDDl.prop('disabled', false);
+                        $.each(data, function (index, item) {
+                            subInventoryDDl.append(
+                                $('<option></option>').val(item.SubInventoryID).html(item.name));
+                        });
+                    },
+                    error: function (x, status, error) {
+                        alert(error);
+                    }
+                })
+
+            }
+        });
+
+
+                    
+            
+
+
+      
+
+        //$("#QuestionText").change(function(){
+
+        //    removeValidation("#QuestionText")
+        //});
+
+        //$("#AnswerText").change(function(){
+
+        //    removeValidation("#AnswerText")
+        //});
+
+
+     
+        $("#btnAddAnswer").click(function () {
+            //var text = $("#QuestionText");
+            //checkValidation(text);
+            //var text = $("#AnswerText");
+            //checkValidation(text);
+            //if ($("#QuestionText").val() == "") {
+            //    $("#QuestionText").css({ "border-color": "red", "border-width ": "1px" });
+            //    //return;
+            //}
+            //else { $("#QuestionText").css({ "border-color": "none", "border-width ": "1px" }); }
+
+
+
+            if ($("#AnswerText").val() != "") {
+
+                if (count < 1)
+                {
+                    var strhtmlhead = '<tr class="head">';
+                    strhtmlhead += '<th>Answer</th>';
+                    strhtmlhead += '<th>Correct Answer</th>';
+                    strhtmlhead += '<th>Control</th></tr>';
+                    count = count + 1;
+                    $("#tblHeader").append(strhtmlhead);
+
+                }
+                var strHtml = '';
+
+                strHtml += '<tr class="answer">';
+                strHtml += '<td style="display: none" class="answer-id"></td>';
+                strHtml += '<td class="answer-text">' + $("#AnswerText").val() + '</td>';
+
+                strHtml += '<td class="correct-answer">';
+                strHtml += '<input type="radio" name="correctAnswerRadio" value=' + $("#AnswerText").val() +' ></td>'
+
+                strHtml += '<td class="answer-delete">';
+                strHtml += '<input type="button" id="btnDeleteAnswer" class="btn btn-primary delete-answer" value="Delete Answer" />';
+                strHtml += '</td>';
+                strHtml += '</tr>';
+
+                $("#tblAnswers").append(strHtml);
+
+                $("#AnswerText").val("");
+
+                $(".delete-answer").click(function () {
+                    $(this).parent().parent().remove();
+                });
+
+
+            }
+            else {
+              //  console.dir("hello");
+
+                //$("#AnswerText").css({ "border-color": "red" ,"border-width ":"1px"})
+            }
+        });
+   
+        //function checkValidation(checkText)
+        //{
+        //    if (checkText.val() == "") { $(checkText).css({ "border-color": "red", "border-width ": "1px" }); return; }
+        //}
+
+        //function removeValidation(checkText) {
+
+        //    if (checkText.val() != "") { $(checkText).css({"border":"none" }); return; }
+        //}
+
+        $("#btnSave").click(function() {
+            if ($("#QuestionText").val() != "" && $("#subInventorySelect").val() > 0) {
+
+                var question = {};
+                var answers = [];
+              
+
+                question.QuestionText = $("#QuestionText").val();
+                question.SubInventoryID = $("#subInventorySelect").val();
+
+                if ($('.answer').length==0) {
+
+                    return;
+                } else {
+                    $('.answer').each(function () {
+                        var answer = {};
+                        answer.AnswerText = $(this).find('.answer-text').text();
+                        // answer.IsCorrect = $(this).find('.correct-answer').a.val();//////////
+                      //  answer.IsCorrect =
+                     //   $(this).find('.correct-answers').has("checked:checked") 
+                        //$(this)..find('.correct-answers').has('input[name="correctAnswerRadio"]').change(function () {
+                        //    alert();
+                        //    var manageradiorel = $('input[name="correctAnswerRadio"]:checked').val();
+                        //    alert(manageradiorel);
+
+                        //});
+                        answers.push(answer);
+                    });
+                }
+
+                question.Answers = answers;
+                var data= {
+                    question:question
+                }
+
+
+                $.ajax({
+                    url: '@Url.Action("Add","Questions")',
+                    type: "POST",
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8;",
+                    success: function(data) {
+                        alert("success");
+                    }
+                });
+
+
+            } else {
+                alert("Please Add Question Text");
+            }
+        });
+    });
+</script>

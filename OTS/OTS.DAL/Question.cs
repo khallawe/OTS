@@ -1,29 +1,23 @@
-﻿using OTS.IDAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OTS.IDAL;
 using OTS.Model;
 
 namespace OTS.DAL
 {
-    public class Question : IQuestion
+    class Question : IQuestion
     {
-        OTSContext db = new OTSContext();
-
-        public int Add(Model.Question question)
+        public int Add(IQuestion question)
         {
-            db.QuestionSet.Add(question);
-            db.SaveChanges();
-            return question.QuestionID;
+            throw new NotImplementedException();
         }
 
         public int Delete(int id)
         {
-            Model.Question question = db.QuestionSet.SingleOrDefault(x => x.QuestionID == id);
-            db.QuestionSet.Remove(question);
-            return db.SaveChanges();
+            throw new NotImplementedException();
         }
 
         public List<Model.Question> Search(string key)
@@ -33,7 +27,8 @@ namespace OTS.DAL
 
         public List<Model.Question> SelectAll()
         {
-            return db.QuestionSet.ToList();
+            OTSContext db = new OTSContext();
+           return db.QuestionSet.ToList();
         }
 
         public List<Model.Question> SelectByExam(int examID)
@@ -48,17 +43,12 @@ namespace OTS.DAL
 
         public Model.Question SelectOne(int id)
         {
-            return db.QuestionSet.Single(x => x.QuestionID == id);
+            throw new NotImplementedException();
         }
 
-        public int Update(Model.Question question)
+        public int Update(IQuestion question)
         {
-            Model.Question oldQuestion = db.QuestionSet.SingleOrDefault(x => x.QuestionID == question.QuestionID);
-            oldQuestion.ModifiedBy = question.ModifiedBy;
-            oldQuestion.ModifiedDate = question.ModifiedDate;
-            oldQuestion.question = question.question;
-            oldQuestion.numberOfAnswers = question.numberOfAnswers;
-            return db.SaveChanges();
+            throw new NotImplementedException();
         }
     }
 }

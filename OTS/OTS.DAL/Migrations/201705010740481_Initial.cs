@@ -3,7 +3,7 @@ namespace OTS.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class dot_net06 : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -12,13 +12,14 @@ namespace OTS.DAL.Migrations
                 c => new
                     {
                         AnswerID = c.Int(nullable: false, identity: true),
-                        answer = c.String(),
+                        AnswerText = c.String(),
                         QuestionID = c.Int(nullable: false),
-                        isCorrect = c.Boolean(nullable: false),
+                        IsCorrect = c.Boolean(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.AnswerID)
                 .ForeignKey("dbo.Question", t => t.QuestionID, cascadeDelete: true)
@@ -29,13 +30,13 @@ namespace OTS.DAL.Migrations
                 c => new
                     {
                         QuestionID = c.Int(nullable: false, identity: true),
-                        question = c.String(),
+                        QuestionText = c.String(),
                         SubInventoryID = c.Int(nullable: false),
-                        numberOfAnswers = c.Int(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.QuestionID)
                 .ForeignKey("dbo.SubInventory", t => t.SubInventoryID, cascadeDelete: true)
@@ -54,6 +55,7 @@ namespace OTS.DAL.Migrations
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                         user_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
@@ -72,6 +74,7 @@ namespace OTS.DAL.Migrations
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.SubInventoryID)
                 .ForeignKey("dbo.Inventory", t => t.InventoryID, cascadeDelete: true)
@@ -88,6 +91,7 @@ namespace OTS.DAL.Migrations
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.InventoryID);
             
@@ -104,6 +108,7 @@ namespace OTS.DAL.Migrations
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Group", t => t.Group_ID, cascadeDelete: true)
@@ -114,11 +119,12 @@ namespace OTS.DAL.Migrations
                 c => new
                     {
                         Group_ID = c.Int(nullable: false, identity: true),
-                        groupName = c.String(),
+                        groupName = c.String(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Group_ID);
             
@@ -133,6 +139,7 @@ namespace OTS.DAL.Migrations
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -156,6 +163,7 @@ namespace OTS.DAL.Migrations
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                         exam_ID = c.Int(),
                         question_QuestionID = c.Int(),
                         selectedAnswer_AnswerID = c.Int(),
@@ -180,6 +188,7 @@ namespace OTS.DAL.Migrations
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -187,20 +196,21 @@ namespace OTS.DAL.Migrations
                 "dbo.Setting",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
-                        examTime = c.Int(nullable: false),
-                        maxQuestionsInSubInventories = c.Int(nullable: false),
-                        minSubInventories = c.Int(nullable: false),
-                        maxSubInventories = c.Int(nullable: false),
-                        randomLength = c.Int(nullable: false),
-                        questionGrades = c.Int(nullable: false),
-                        validTimeAccess = c.Int(nullable: false),
+                        SettingID = c.Int(nullable: false, identity: true),
+                        ExamTime = c.Int(nullable: false),
+                        MaxQuestionsInSubInventories = c.Int(nullable: false),
+                        MinSubInventories = c.Int(nullable: false),
+                        MaxSubInventories = c.Int(nullable: false),
+                        RandomLength = c.Int(nullable: false),
+                        QuestionGrades = c.Int(nullable: false),
+                        ValidTimeAccess = c.Int(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.SettingID);
             
             CreateTable(
                 "dbo.Student",
@@ -214,6 +224,7 @@ namespace OTS.DAL.Migrations
                         CreatedBy = c.Int(nullable: false),
                         ModifiedDate = c.DateTime(),
                         ModifiedBy = c.Int(),
+                        IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             

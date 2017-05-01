@@ -33,8 +33,7 @@ namespace OTS.Controllers
                 errorLog.UserID = ((Model.User)Session["User"]).ID;
                 errorLog.CreatedDate = DateTime.Now;
                 errorLog.errorMsg = ex.Message;
-
-                return RedirectToAction("Create");
+                return View();
             }
         }
 
@@ -140,13 +139,20 @@ namespace OTS.Controllers
         }
         
        
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            Inventory inventory = BLL.Inventory.Instance.SelectOne(id);
+            return View(inventory);
+        }
         // POST: Inventory/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Inventory inventory)
         {
             try
             {
-                BLL.Inventory.Instance.Delete(id);
+                BLL.Inventory.Instance.Delete(inventory.InventoryID);
 
                 return RedirectToAction("Index");
             }

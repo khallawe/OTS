@@ -3,7 +3,7 @@ namespace OTS.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial06 : DbMigration
+    public partial class dot_net06 : DbMigration
     {
         public override void Up()
         {
@@ -203,6 +203,21 @@ namespace OTS.DAL.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
+                "dbo.Student",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        studentID = c.Int(nullable: false),
+                        studentName = c.String(nullable: false),
+                        studentEmail = c.String(nullable: false),
+                        CreatedDate = c.DateTime(nullable: false),
+                        CreatedBy = c.Int(nullable: false),
+                        ModifiedDate = c.DateTime(),
+                        ModifiedBy = c.Int(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
                 "dbo.SubInventoryExam",
                 c => new
                     {
@@ -276,6 +291,7 @@ namespace OTS.DAL.Migrations
             DropTable("dbo.RoleGroup");
             DropTable("dbo.ExamQuestion");
             DropTable("dbo.SubInventoryExam");
+            DropTable("dbo.Student");
             DropTable("dbo.Setting");
             DropTable("dbo.GradingCriteria");
             DropTable("dbo.ExamLog");

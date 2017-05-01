@@ -4,61 +4,96 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Group</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.groupName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.groupName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedBy)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<div class="panel panel-default" data-widget='{"draggable": "false"}'>
+    <div class="panel-heading">
+        <h2>Delete Group</h2>
+        <div class="panel-ctrls"
+             data-actions-container=""
+             data-action-collapse='{"target": ".panel-body"}'
+             data-action-expand=''
+             data-action-colorpicker=''>
         </div>
-    }
+    </div>
+    <div class="panel-editbox" data-widget-controls=""></div>
+    <div class="panel-body">
+
+
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Group Name</label>
+                <div class="col-md-10">
+                    <label class="control-label col-md-10">@Model.groupName</label>
+
+                </div>
+            </div>
+
+           
+            <div class="form-group">
+                <label class="control-label col-md-2">Created Date</label>
+                <div class="col-md-10">
+                    <label class="control-label col-md-10">@Model.CreatedDate</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Created By</label>
+                <div class="col-md-10">
+                    <label class="control-label col-md-10">@OTS.Controllers.UserController.GetUserByID(Model.CreatedBy)</label>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Modified Date</label>
+                <div class="col-md-10">
+                    <label class="control-label col-md-10">@Model.ModifiedDate</label>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Modified By</label>
+                <div class="col-md-10">
+                    @{
+                        int modby = 0;
+                        if (Model.ModifiedBy != null)
+                        {
+                            modby = (int)Model.ModifiedBy;
+
+                        }
+
+                    }
+                    <label class="control-label col-md-10">@OTS.Controllers.UserController.GetUserByID(modby)</label>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                                @Html.ActionLink("Cancel", "Index", "Group", null, new { @class = "btn-default btn" })
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
 </div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+

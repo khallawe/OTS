@@ -25,6 +25,17 @@ namespace OTS.Controllers
         public ActionResult Details(int id)
         {
             Model.User user = BLL.User.Instance.SelectOne(id);
+            try
+            {
+                TempData["Groups"] = new SelectList(BLL.Group.Instance.getGroupsDbSet(), "Group_ID", "groupName", user.Group_ID);
+                user.password = CCrypt.Decrypt(user.password);
+
+            }
+            catch (Exception)
+            {
+
+
+            }
             return View(user);
         }
 
@@ -54,7 +65,7 @@ namespace OTS.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(user.userName, "this user already exist");
+                        ModelState.AddModelError("userName", "this user already exist");
                         return View(user);
                     }
                         
@@ -72,10 +83,18 @@ namespace OTS.Controllers
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
-
             Model.User user = BLL.User.Instance.SelectOne(id);
-            user.password = CCrypt.Decrypt(user.password);
-            TempData["Groups"] = new SelectList(BLL.Group.Instance.getGroupsDbSet(), "Group_ID", "groupName",user.Group_ID);
+            try
+            {
+                TempData["Groups"] = new SelectList(BLL.Group.Instance.getGroupsDbSet(), "Group_ID", "groupName", user.Group_ID);
+                user.password = CCrypt.Decrypt(user.password);
+               
+            }
+            catch (Exception)
+            {
+
+                
+            }
             return View(user);
         }
 
@@ -142,6 +161,15 @@ namespace OTS.Controllers
         {
             SMTP email = new SMTP();
             email.SendEmail("mabuhussein03@gmail.com", "msg title", "msg contant");
+        }
+        public string Random()
+        {
+            return RandomCode.RandomString(25);
+        }
+        public static string GetUserByID(int id)
+        {
+            if (id == 0) return "";
+            return BLL.User.Instance.SelectOne(id).name;
         }
     }
 }

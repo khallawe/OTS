@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace OTS.IDAL
 {
-    interface IGradingCriteria
+    public interface IGradingCriteria
     {
-        int Add(IGradingCriteria gradingCriteria);
-        int Update(IGradingCriteria gradingCriteria);
+        int Add(GradingCriteria gradingCriteria);
+        int Update(GradingCriteria gradingCriteria);
         int Delete(int id);
         GradingCriteria SelectOne(int id);
         List<GradingCriteria> SelectAll();

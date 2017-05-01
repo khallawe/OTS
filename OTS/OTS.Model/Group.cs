@@ -11,6 +11,7 @@ namespace OTS.Model
     {
         [Key]
         public int Group_ID { get; set; }
+        [Required(ErrorMessage = "this field Required")]
         public string groupName { get; set; }
         public List<Role> roles { get; set; }
         public virtual List<User> users { get; set; }

@@ -59,6 +59,7 @@
     <Compile Include="IQuestion.cs" />
     <Compile Include="IRole.cs" />
     <Compile Include="ISetting.cs" />
+    <Compile Include="IStudent.cs" />
     <Compile Include="ISubInventory.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -24,6 +24,7 @@ namespace OTS.DAL
         public IDbSet<Model.Inventory> InventorySet { get; set; }
         public IDbSet<Model.Question> QuestionSet { get; set; }
         public IDbSet<Model.Answer> AnswerSet { get; set; }
+        public IDbSet<Model.Student> StudentSet { get; set; }
         public IDbSet<Model.Setting> SettingSet { get; set; }
         public IDbSet<Model.SubInventory> SubInventorySet { get; set; }
         public IDbSet<Model.User> UserSet { get; set; }

@@ -1,4 +1,4 @@
-﻿@model OTS.Model.Group
+﻿@model OTS.Model.Student
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 
 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
     <div class="panel-heading">
-        <h2>Group Details</h2>
+        <h2>Student Details</h2>
         <div class="panel-ctrls"
              data-actions-container=""
              data-action-collapse='{"target": ".panel-body"}'
@@ -22,13 +22,27 @@
         <div class="form-horizontal">
 
             <div class="form-group">
-                <label class="control-label col-md-2">Group Name</label>
+                <label class="control-label col-md-2">Student ID</label>
                 <div class="col-md-10">
-                    <label class="control-label col-md-10">@Model.groupName</label>
+                    <label class="control-label col-md-10">@Model.studentID</label>
 
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="control-label col-md-2">Student Name</label>
+                <div class="col-md-10">
+                    <label class="control-label col-md-10">@Model.studentName</label>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Student Email</label>
+                <div class="col-md-10">
+                    <label class="control-label col-md-10">@Model.studentEmail</label>
+
+                </div>
+            </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Created Date</label>
                 <div class="col-md-10">
@@ -66,12 +80,12 @@
             </div>
 
 
-
+           
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2">
-                        @Html.ActionLink("Edit", "Edit", new { id = Model.Group_ID }, new { @class = "btn-primary btn" })
-                        @Html.ActionLink("Cancel", "Index", "Group", null, new { @class = "btn-default btn" })
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn-primary btn" })
+                        @Html.ActionLink("Cancel", "Index", "Student", null, new { @class = "btn-default btn" })
                     </div>
                 </div>
             </div>

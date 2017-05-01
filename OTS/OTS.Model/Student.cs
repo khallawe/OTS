@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OTS.Model
 {
-    class Student: Base
+    public class Student: Base
     {
         [Key]
         public int ID { get; set; }

@@ -4,36 +4,58 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Group</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.groupName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.groupName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.groupName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-       
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+<div class="panel panel-default" data-widget='{"draggable": "false"}'>
+    <div class="panel-heading">
+        <h2>Edit Group Form</h2>
+        <div class="panel-ctrls"
+             data-actions-container=""
+             data-action-collapse='{"target": ".panel-body"}'
+             data-action-expand=''
+             data-action-colorpicker=''>
         </div>
     </div>
-}
+    <div class="panel-editbox" data-widget-controls=""></div>
+    <div class="panel-body">
 
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Group_ID)
+                @Html.HiddenFor(model => model.CreatedBy)
+                @Html.HiddenFor(model => model.CreatedDate)
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Group Name</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.groupName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.groupName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <input type="submit" value="Submit" class="btn-primary btn" />
+                            @Html.ActionLink("Cancel", "Index", "Group", null, new { @class = "btn-default btn" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+
+    </div>
+</div>
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+

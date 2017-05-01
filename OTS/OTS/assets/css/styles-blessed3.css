@@ -1568,8 +1568,8 @@ pre code {
 .container-fluid {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 12px;
-  padding-right: 12px;
+  /*padding-left: 12px;
+  padding-right: 12px;*/
 }
 .row {
   margin-left: -12px;
@@ -2913,7 +2913,7 @@ select[multiple].form-group-lg .form-control {
 }
 @media (min-width: 768px) {
   .form-horizontal .control-label {
-    text-align: right;
+     /* text-align: right; */
     margin-bottom: 0;
     padding-top: 6px;
   }

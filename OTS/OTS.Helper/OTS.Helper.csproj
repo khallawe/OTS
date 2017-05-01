@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CCrypt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomCode.cs" />
     <Compile Include="SMTP.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,67 +2,102 @@
 
 @{
     ViewBag.Title = "Details";
+
+    TempData.Keep("Groups");
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+<div class="panel panel-default" data-widget='{"draggable": "false"}'>
+    <div class="panel-heading">
+        <h2>User Details</h2>
+        <div class="panel-ctrls"
+             data-actions-container=""
+             data-action-collapse='{"target": ".panel-body"}'
+             data-action-expand=''
+             data-action-colorpicker=''>
+        </div>
+    </div>
+    <div class="panel-editbox" data-widget-controls=""></div>
+    <div class="panel-body">
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.userName)
-        </dt>
+            <div class="form-horizontal">
+               
+                <div class="form-group">
+                    <label class="control-label col-md-2">Name</label>
+                    <div class="col-md-10">
+                        <label class="control-label col-md-10">@Model.name</label>
 
-        <dd>
-            @Html.DisplayFor(model => model.userName)
-        </dd>
+                    </div>
+                </div>
 
-       
+                <div class="form-group">
+                    <label class="control-label col-md-2">User Name</label>
+                    <div class="col-md-10">
+                        <label class="control-label col-md-10">@Model.userName</label>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Created Date</label>
+                    <div class="col-md-10">
+                        <label class="control-label col-md-10">@Model.CreatedDate</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Created By</label>
+                    <div class="col-md-10">
+                        <label class="control-label col-md-10">@OTS.Controllers.UserController.GetUserByID(Model.CreatedBy)</label>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Modified Date</label>
+                    <div class="col-md-10">
+                        <label class="control-label col-md-10">@Model.ModifiedDate</label>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Modified By</label>
+                    <div class="col-md-10">
+                        @{
+                            int modby = 0;
+                            if (Model.ModifiedBy != null)
+                            {
+                                modby = (int)Model.ModifiedBy;
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
+                            }
+                           
+                                 }
+                        <label class="control-label col-md-10">@OTS.Controllers.UserController.GetUserByID(modby)</label>
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
+               
+                @*To Get Group List*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Group_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model=>model.Group_ID, (SelectList)(TempData["Groups"]), "Select Category", new { @class = "form-control",  disabled = "disabled", @readonly = "readonly" })
+                        
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </dt>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn-primary btn" })
+                            @Html.ActionLink("Cancel", "Index", "User", null, new { @class = "btn-default btn" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
 
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedBy)
-        </dd>
 
-       
-    </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+<div>
     @Html.ActionLink("Back to List", "Index")
-</p>
+</div>

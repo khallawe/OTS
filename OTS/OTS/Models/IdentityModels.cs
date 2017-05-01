@@ -31,5 +31,11 @@ namespace OTS.Models
         }
 
         public System.Data.Entity.DbSet<OTS.Model.Group> Groups { get; set; }
+
+        public System.Data.Entity.DbSet<OTS.Model.Student> Students { get; set; }
+
+        public System.Data.Entity.DbSet<OTS.Model.Inventory> Inventories { get; set; }
+
+        public System.Data.Entity.DbSet<OTS.Model.GradingCriteria> GradingCriterias { get; set; }
     }
 }

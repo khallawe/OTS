@@ -1,13 +1,15 @@
-﻿@model OTS.Model.Group
+﻿@model OTS.Model.Inventory
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Delete";
 }
 
 
+
+<h3>Are you sure you want to delete this?</h3>
 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
     <div class="panel-heading">
-        <h2>Group Details</h2>
+        <h2>Delete Student</h2>
         <div class="panel-ctrls"
              data-actions-container=""
              data-action-collapse='{"target": ".panel-body"}'
@@ -22,13 +24,21 @@
         <div class="form-horizontal">
 
             <div class="form-group">
-                <label class="control-label col-md-2">Group Name</label>
+                <label class="control-label col-md-2">Name</label>
                 <div class="col-md-10">
-                    <label class="control-label col-md-10">@Model.groupName</label>
+                    <label class="control-label col-md-10">@Model.name</label>
 
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="control-label col-md-2">Description</label>
+                <div class="col-md-10">
+                    <label class="control-label col-md-10">@Model.description</label>
+
+                </div>
+            </div>
+           
             <div class="form-group">
                 <label class="control-label col-md-2">Created Date</label>
                 <div class="col-md-10">
@@ -65,16 +75,23 @@
                 </div>
             </div>
 
-
-
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2">
-                        @Html.ActionLink("Edit", "Edit", new { id = Model.Group_ID }, new { @class = "btn-primary btn" })
-                        @Html.ActionLink("Cancel", "Index", "Group", null, new { @class = "btn-default btn" })
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                                @Html.ActionLink("Cancel", "Index", "Inventory", null, new { @class = "btn-default btn" })
+                            </div>
+                        }
+
                     </div>
                 </div>
             </div>
+
         </div>
 
 

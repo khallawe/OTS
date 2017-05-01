@@ -5,68 +5,70 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <p>
-    @Html.ActionLink("Add New Sub Category", "Create")
+    @Html.ActionLink("Add New Category", "Create")
 </p>
 
-    <table class="table">
-        <tr>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.CreatedDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreatedBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ModifiedDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ModifiedBy)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.InventoryID)
-                </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.description)
-            </th>
-            <th></th>
-        </tr>
+<div class="container-fluid">
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.CreatedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedBy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModifiedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModifiedBy)
-                    </td>*@
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.InventoryID)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.description)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.SubInventoryID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.SubInventoryID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.SubInventoryID })
-                </td>
-            </tr>
-        }
+    <div class="row">
+        <div class="col-md-12">
 
-    </table>
+            <div class="panel panel-default" id="panel-inline">
+                <div class="panel-heading">
+                    <h2>Sub Category List</h2>
+                    <div class="panel-ctrls"></div>
+                </div>
+                <div class="panel-body panel-no-padding">
 
+                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" id="editable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Invintory</th>
+                                <th>Created Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.inventory.name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                                    </td>
+
+
+                                    <td>
+                                        @*@Html.ActionLink("Edit", "Edit", new { id = item.InventoryID }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.InventoryID }) |*@
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.InventoryID })
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table><!--end table-->
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
 

@@ -35,7 +35,11 @@
 
     <link type="text/css" href="/assets/plugins/form-daterangepicker/daterangepicker-bs3.css" rel="stylesheet"> 	<!-- DateRangePicker -->
     <link type="text/css" href="/assets/plugins/fullcalendar/fullcalendar.css" rel="stylesheet"> 					<!-- FullCalendar -->
-    <link type="text/css" href="/assets/plugins/charts-chartistjs/chartist.min.css" rel="stylesheet"> 				<!-- Chartist -->
+    <link type="text/css" href="/assets/plugins/charts-chartistjs/chartist.min.css" rel="stylesheet"> 	
+
+    <link type="text/css" href="/assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">                    <!-- Bootstrap Support for Datatables -->
+    <link type="text/css" href="/assets/plugins/datatables/dataTables.fontAwesome.css" rel="stylesheet">                  <!-- FontAwesome Support for Datatables -->
+			<!-- Chartist -->
     @Scripts.Render("~/bundles/jquery");
 </head>
 
@@ -439,8 +443,9 @@
                 "dom": '<"top"fl>rt<"bottom"pi><"clear">',
                 "initComplete": function () {
                     $("select[name='editable_length']").parent("label").addClass('hidden');
-                    $("select[name='editable_length']").css({ "width": "30%", "float": "right", "margin-top": "5px" });
-                    $(".paging_bootstrap").css({ "float":"right" });
+                    $("select[name='editable_length']").css({ "width": "30%", "float": "right", "margin-top": "5px"});
+                    $(".paging_bootstrap").css({ "float": "right" });
+                    $(".dataTables_info").css({ "padding-left": "8px" });
                     $(".panel-ctrls").attr("style", "line-height: 18px");
                     $("input[type='search']").css({ "width": "70%", "float": "right", "margin-top": "5px" });
                     $("select[name='editable_length']").insertBefore("input[type='search']");

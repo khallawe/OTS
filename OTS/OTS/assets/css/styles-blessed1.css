@@ -7080,7 +7080,7 @@ div.DTTT .btn.btn-default {
   font-size: inherit;
 }
 div.dataTables_info {
-  padding: 8px 0 !important;
+ /* padding: 8px 0 !important; */
 }
 .bootstrap-touchspin .input-group-addon.bootstrap-touchspin-prefix + .form-control {
   border-bottom-left-radius: 2px;

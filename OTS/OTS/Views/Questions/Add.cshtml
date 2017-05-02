@@ -2,10 +2,9 @@
 
 @{
     ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-
-
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
     .answer-text {
@@ -15,85 +14,60 @@
     .answer-delete {
         width: 20%;
     }
-
     select {
-        width: 20%;
-        margin-top: 5px;
-        margin-bottom: 10px;
+        width:20%;
+        margin-top:5px;
+        margin-bottom:10px;
+      
     }
 </style>
 
+<h3>Add Question</h3>
+<br/>
+@*@Html.Label("inventorySelect", "Category ",new { @Class=""})*@
+<select id="inventorySelect" ></select><br/>
+@*@Html.Label("inventorySelect", "SubCategory", new { @Class = "" })*@
+<select id="subInventorySelect"></select>
+   
+<br/>
+@*@Html.Label("QuestionText", "Add Question")*@
+@Html.TextArea("QuestionText",null, new { cols = 40, @class = "form-control" })
+<br />
 
-
-<div class="panel panel-default" data-widget='{"draggable": "false"}'>
-    <div class="panel-heading">
-        <h2>Create SubInventory Form</h2>
-        <div class="panel-ctrls"
-             data-actions-container=""
-             data-action-collapse='{"target": ".panel-body"}'
-             data-action-expand=''
-             data-action-colorpicker=''>
-        </div>
+<div class="row">
+    @*<div class="col-md-1">
+        @Html.Label("AnswerText", "Answer Text")
+    </div>*@
+    <div class="col-md-5">
+        @Html.TextBox("AnswerText", null, new { @class = "form-control" })
     </div>
-    <div class="panel-editbox" data-widget-controls=""></div>
-    <div class="panel-body">
-
-       
-            
-
-            <div class="form-horizontal">
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Inventory</label>
-                    <div class="col-md-10">
-                        <select class="form-control" id="inventorySelect"></select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">SubInventory</label>
-                    <div class="col-md-10">
-                        <select class="form-control" id="subInventorySelect"></select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Question</label>
-                    <div class="col-md-10">
-                        @Html.TextArea("QuestionText", null, new { cols = 40, @class = "form-control" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Answer</label>
-                    <div class="col-md-10">
-                        @Html.TextBox("AnswerText", null, new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <input type="button" id="btnAddAnswer" class="btn btn-primary" value="Add Answer" />
-                </div>
-
-                <table id="tblAnswers" class="table table-bordered table-striped" style="margin-top: 50px; width: 50%;">
-                    <thead id="tblHeader">
-                    </thead>
-                </table>
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2">
-                            <input type="button" class="btn btn-primary" id="btnSave" value="Save" />
-                            @Html.ActionLink("Cancel", "Index", "SubInventory", null, new { @class = "btn-default btn" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-      
-
-
+    <div class="col-md-1">
+        <input type="button" id="btnAddAnswer" class="btn btn-primary" value="Add Answer" />
     </div>
-</div>
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <p>
+     
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
 
 
+
+
+
+<table id="tblAnswers" class="table table-bordered table-striped" style="margin-top: 50px; width: 50%;">
+    <thead id="tblHeader">
+        </thead>
+        @*<tr class="answer">
+                <td style="display: none" class="answer-id">1</td>
+                <td class="answer-text">First Answer</td>
+                <td class="answer-delete">
+                    <input type="button" id="btnDeleteAnswer" class="btn btn-primary" value="Delete Answer" />
+                </td>
+            </tr>*@
+</table>
+
+
+<input type="button" class="btn btn-primary" id="btnSave" value="Save" />
 
 <script type="text/javascript">
     var count = 0;
@@ -204,7 +178,7 @@
                 strHtml += '<td class="answer-text">' + $("#AnswerText").val() + '</td>';
 
                 strHtml += '<td class="correct-answer">';
-                strHtml += '<input type="radio" name="correctAnswerRadio" value=' + $("#AnswerText").val() +' ></td>'
+                strHtml += '<input type="radio" class="radio-answer" name="correctAnswerRadio" value=' + $("#AnswerText").val() +' ></td>'
 
                 strHtml += '<td class="answer-delete">';
                 strHtml += '<input type="button" id="btnDeleteAnswer" class="btn btn-primary delete-answer" value="Delete Answer" />';
@@ -255,6 +229,9 @@
                     $('.answer').each(function () {
                         var answer = {};
                         answer.AnswerText = $(this).find('.answer-text').text();
+                        answer.IsCorrect = $(this).find('.correct-answer').find('.radio-answer').is(":checked");
+                        
+                        //$("#radio_1").attr('checked', 'checked');
                         // answer.IsCorrect = $(this).find('.correct-answer').a.val();//////////
                       //  answer.IsCorrect =
                      //   $(this).find('.correct-answers').has("checked:checked") 
@@ -292,3 +269,4 @@
         });
     });
 </script>
+<script type=""

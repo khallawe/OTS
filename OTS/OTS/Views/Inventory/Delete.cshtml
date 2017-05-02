@@ -19,10 +19,12 @@
     </div>
     <div class="panel-editbox" data-widget-controls=""></div>
     <div class="panel-body">
-
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-
+            @Html.HiddenFor(model => model.InventoryID)
             <div class="form-group">
                 <label class="control-label col-md-2">Name</label>
                 <div class="col-md-10">
@@ -78,15 +80,13 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2">
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
+                       
 
                             <div class="form-actions no-color">
                                 <input type="submit" value="Delete" class="btn btn-danger" />
                                 @Html.ActionLink("Cancel", "Index", "Inventory", null, new { @class = "btn-default btn" })
                             </div>
-                        }
+                        
 
                     </div>
                 </div>
@@ -94,7 +94,7 @@
 
         </div>
 
-
+}
 
     </div>
 </div>

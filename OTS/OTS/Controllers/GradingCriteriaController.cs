@@ -31,19 +31,16 @@ namespace OTS.Controllers
         {
             try
             {
-                if (BLL.GradingCriteria.Instance.CheckDuplicate(gc))
-                {
-                    ModelState.AddModelError("grading", "This criteria is already in use");
-                }
+                gc.CreatedDate = DateTime.Now;
+                gc.CreatedBy = ((Model.User)Session["User"]).ID;
+                
 
                 if (ModelState.IsValid)
                 {
-                    gc.CreatedDate = DateTime.Now;
-                    gc.CreatedBy = ((Model.User)Session["User"]).ID;
                     int res = BLL.GradingCriteria.Instance.Add(gc);
                     return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+                return View(gc);
             }
 
             catch (Exception ex)

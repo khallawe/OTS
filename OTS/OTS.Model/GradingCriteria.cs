@@ -10,9 +10,11 @@ namespace OTS.Model
     {
         [Key]
         public int ID { get; set; }
-
+        [Required(ErrorMessage = "this field Required")]
         public int minVal { get; set; }
+        [Required(ErrorMessage = "this field Required")]
         public int maxVal { get; set; }
+        [Required(ErrorMessage = "this field Required")]
         public string grade { get; set; }
     }
 }

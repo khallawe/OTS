@@ -21,7 +21,7 @@
 
 
         <div class="form-horizontal">
-
+           
             <div class="form-group">
                 <label class="control-label col-md-2">Group Name</label>
                 <div class="col-md-10">
@@ -73,7 +73,7 @@
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
-
+                            @Html.HiddenFor(model => model.Group_ID)
                             <div class="form-actions no-color">
                                 <input type="submit" value="Delete" class="btn btn-danger" />
                                 @Html.ActionLink("Cancel", "Index", "Group", null, new { @class = "btn-default btn" })

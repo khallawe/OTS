@@ -15,13 +15,13 @@ namespace OTS.DAL
 
         public int Add(Model.SubInventory subInventory)
         {
-           
+
             db.SubInventorySet.Add(subInventory);
             return db.SaveChanges();
 
         }
 
-       
+
 
         public int Delete(int subInventoryID)
         {
@@ -37,15 +37,17 @@ namespace OTS.DAL
 
         public List<Model.SubInventory> SelectAll()
         {
-            return db.SubInventorySet.ToList();
+            return db.SubInventorySet.Include("Inventory").ToList();
         }
 
         public Model.SubInventory SelectOne(int id)
         {
-            return db.SubInventorySet.Single(x => x.SubInventoryID == id);
+
+            Model.SubInventory subInventory = db.SubInventorySet.Include("Inventory").Single(x => x.SubInventoryID == id);
+            return subInventory;
         }
 
-        
+
 
         public int Update(Model.SubInventory subInventory)
         {

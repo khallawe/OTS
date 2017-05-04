@@ -33,10 +33,8 @@ namespace OTS.Controllers
         public ActionResult Create([Bind(Exclude = "ModifiedDate,ModifiedBy")]Group group)
         {
             
-            List<Role> r = new List<Role>();
             group.CreatedDate = DateTime.Now;
             group.CreatedBy = ((User)Session["user"]).ID;
-            group.roles = r;
             group.groupName.ToLower();
 
             if (ModelState.IsValid)

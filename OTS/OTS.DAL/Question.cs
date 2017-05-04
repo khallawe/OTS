@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OTS.IDAL;
-using OTS.Model;
+using System.Data.Entity;
 
 namespace OTS.DAL
 {
     class Question : IQuestion
     {
-        public int Add(IQuestion question)
+        public int Add(Model.Question question)
         {
-            throw new NotImplementedException();
+            using (var db = new OTSContext())
+            {
+                db.QuestionSet.Add(question);
+                return db.SaveChanges();
+            }
+            
         }
 
         public int Delete(int id)
@@ -27,8 +30,13 @@ namespace OTS.DAL
 
         public List<Model.Question> SelectAll()
         {
-            OTSContext db = new OTSContext();
-           return db.QuestionSet.ToList();
+            List<Model.Question> data;
+
+            using (var db = new OTSContext())
+            {
+                return data=db.QuestionSet.Include(x => x.SubInventory.inventory).ToList();
+            }
+            
         }
 
         public List<Model.Question> SelectByExam(int examID)
@@ -46,7 +54,7 @@ namespace OTS.DAL
             throw new NotImplementedException();
         }
 
-        public int Update(IQuestion question)
+        public int Update(Model.Question question)
         {
             throw new NotImplementedException();
         }

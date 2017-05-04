@@ -18,9 +18,9 @@ namespace OTS.BLL
         /// </summary>
         public static Question Instance { get { Question Instance = new Question(); return Instance; } }
 
-        public int Add(IQuestion question)
+        public int Add(Model.Question question)
         {
-            throw new NotImplementedException();
+            return dal.Add(question);
         }
 
         public int Delete(int id)
@@ -53,7 +53,7 @@ namespace OTS.BLL
             throw new NotImplementedException();
         }
 
-        public int Update(IQuestion question)
+        public int Update(Model.Question question)
         {
             throw new NotImplementedException();
         }

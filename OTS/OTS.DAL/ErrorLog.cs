@@ -10,13 +10,14 @@ namespace OTS.DAL
 {
     class ErrorLog : IErrorLog
     {
-        OTSContext db = new OTSContext();
+       
     
 
         public int Add(Model.ErrorLog error)
         {
+            OTSContext db = new OTSContext();
             db.ErrorLogSet.Add(error);
-           return db.SaveChanges();
+            return db.SaveChanges();
         }
 
         public List<Model.ErrorLog> Search(string key)

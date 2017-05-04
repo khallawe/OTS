@@ -10,12 +10,27 @@ namespace OTS.Model
     {
         [Key]
         public int SettingID { get; set; }
+
+        [Required(ErrorMessage = "This field Required")]
         public int ExamTime { get; set; }
+
+        [Required(ErrorMessage = "This field Required")]
         public int MaxQuestionsInSubInventories { get; set; }
+
+        [Required(ErrorMessage = "This field Required")]
         public int MinSubInventories { get; set; }
-        public int MaxSubInventories { get; set; }  
+
+        [Required(ErrorMessage = "This field Required")]
+        public int MaxSubInventories { get; set; }
+
+        [Required(ErrorMessage = "This field Required")]
         public int RandomLength { get; set; }
+
+        [Required(ErrorMessage = "This field Required")]
         public int QuestionGrades { get; set; }
+
+        [Required(ErrorMessage = "This field Required")]
+        
         public int ValidTimeAccess { get; set; }
 
     }

@@ -167,6 +167,7 @@ namespace OTS.Controllers
             return RandomCode.RandomString(25);
         }
         public static string GetUserByID(int id)
+
         {
             if (id == 0) return "";
             return BLL.User.Instance.SelectOne(id).name;

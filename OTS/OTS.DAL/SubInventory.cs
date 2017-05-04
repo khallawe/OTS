@@ -11,23 +11,31 @@ namespace OTS.DAL
 {
     class SubInventory : ISubInventory
     {
-        OTSContext db = new OTSContext();
+
 
         public int Add(Model.SubInventory subInventory)
         {
-           
-            db.SubInventorySet.Add(subInventory);
-            return db.SaveChanges();
+            using (var db = new OTSContext())
+            {
+                db.SubInventorySet.Add(subInventory);
+                return db.SaveChanges();
+            }
+            
 
         }
 
-       
 
+        //Delete is making  is Active field==False
         public int Delete(int subInventoryID)
         {
-            Model.SubInventory SubInventoryToDelete = db.SubInventorySet.SingleOrDefault(x => x.SubInventoryID == subInventoryID);
-            db.SubInventorySet.Remove(SubInventoryToDelete);
-            return db.SaveChanges();
+            using ( var db = new OTSContext())
+                {
+                Model.SubInventory SubInventoryToDelete = db.SubInventorySet.Single(x => x.SubInventoryID == subInventoryID);
+                //  db.SubInventorySet.Remove(SubInventoryToDelete);
+                SubInventoryToDelete.IsActive = false;
+                return db.SaveChanges();
+            }
+            
         }
 
         public List<SubInventory> Search(string key)
@@ -37,26 +45,46 @@ namespace OTS.DAL
 
         public List<Model.SubInventory> SelectAll()
         {
-            return db.SubInventorySet.ToList();
+            List<Model.SubInventory> data;
+            using (var db = new OTSContext())
+            {
+
+                return data= db.SubInventorySet.Include("Inventory")
+                    .Where(x => x.inventory.IsActive == true && x.IsActive == true)
+                    .OrderByDescending(p => p.SubInventoryID)
+                    .Take(200).ToList().ToList();
+            }
         }
 
         public Model.SubInventory SelectOne(int id)
         {
-            return db.SubInventorySet.Single(x => x.SubInventoryID == id);
+            Model.SubInventory data;
+            using (var db = new OTSContext())
+            {
+
+                data= db.SubInventorySet.Include("Inventory").Single(x => x.SubInventoryID == id);
+            }
+            return data;
+            
         }
 
-        
+
 
         public int Update(Model.SubInventory subInventory)
         {
-            Model.SubInventory SubInventoryToUpdate = db.SubInventorySet.SingleOrDefault(x => x.SubInventoryID == subInventory.SubInventoryID);
-            SubInventoryToUpdate.SubInventoryID = subInventory.SubInventoryID;
-            SubInventoryToUpdate.InventoryID = subInventory.InventoryID;
-            SubInventoryToUpdate.ModifiedBy = subInventory.ModifiedBy;
-            SubInventoryToUpdate.ModifiedDate = subInventory.ModifiedDate;
-            SubInventoryToUpdate.name = subInventory.name;
-            SubInventoryToUpdate.description = subInventory.description;
-            return db.SaveChanges();
+            using (var db = new OTSContext())
+            {
+
+                Model.SubInventory SubInventoryToUpdate = db.SubInventorySet.SingleOrDefault(x => x.SubInventoryID == subInventory.SubInventoryID);
+                SubInventoryToUpdate.SubInventoryID = subInventory.SubInventoryID;
+                SubInventoryToUpdate.InventoryID = subInventory.InventoryID;
+                SubInventoryToUpdate.ModifiedBy = subInventory.ModifiedBy;
+                SubInventoryToUpdate.ModifiedDate = subInventory.ModifiedDate;
+                SubInventoryToUpdate.name = subInventory.name;
+                SubInventoryToUpdate.description = subInventory.description;
+                return db.SaveChanges();
+            }
+            
         }
 
 
@@ -83,12 +111,21 @@ namespace OTS.DAL
 
         public IDbSet<Model.SubInventory> getDbSet()
         {
+            OTSContext db = new OTSContext();
+
             return db.SubInventorySet;
+            
         }
 
         public List<Model.SubInventory> SelectByInventory(int inventoryId)
         {
-            return db.SubInventorySet.Where(si => si.InventoryID == inventoryId).ToList();
+            List<Model.SubInventory> data;
+            using (var db = new OTSContext())
+            {
+
+                return data= db.SubInventorySet.Where(si => si.InventoryID == inventoryId).ToList();
+            }
+            
         }
     }
 }

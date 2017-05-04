@@ -9,8 +9,8 @@ namespace OTS.IDAL
 {
    public interface IQuestion
     {
-        int Add(IQuestion question);
-        int Update(IQuestion question);
+        int Add(Question question);
+        int Update(Question question);
         int Delete(int id);
         Question SelectOne(int id);
         List<Question> SelectAll();   

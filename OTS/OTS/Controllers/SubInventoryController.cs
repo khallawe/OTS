@@ -1,4 +1,5 @@
 ﻿using OTS.Authentication;
+using OTS.code;
 using OTS.DAL;
 using OTS.Model;
 using System;
@@ -12,7 +13,6 @@ namespace OTS.Controllers
     [AuthenticateAdminSession]
     public class SubInventoryController : Controller
     {
-        ErrorLog errorLog = new ErrorLog();
 
 
         // GET: SubInventory
@@ -26,11 +26,8 @@ namespace OTS.Controllers
             }
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
-
-               return  RedirectToAction("Create","Inventory");
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
+                return View();
             }
         }
 
@@ -39,7 +36,6 @@ namespace OTS.Controllers
         {
             try
             {
-                //OTSContext db = new OTSContext();
 
                 SubInventory subInventory = BLL.SubInventory.Instance.SelectOne(id);
                 ViewBag.GetInventoryName = BLL.Inventory.Instance.getDbSet().SingleOrDefault(x => x.InventoryID == subInventory.InventoryID).name;
@@ -48,10 +44,8 @@ namespace OTS.Controllers
 
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
-                return View() ;
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
+                return RedirectToAction("Index");
 
             }
         }
@@ -63,15 +57,16 @@ namespace OTS.Controllers
         {
             try
             {
-               // OTSContext db = new OTSContext();
-                TempData["InventoryID"] = new SelectList(BLL.Inventory.Instance.getDbSet(), "InventoryID", "name");
+                
+
+                TempData["InventoryID"] = new SelectList(BLL.Inventory.Instance.getDbSet().Where(x=>x.IsActive==true), "InventoryID", "name");
+
+
                 return View();
             }
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
                 return View();
 
             }
@@ -82,30 +77,29 @@ namespace OTS.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Exclude = "CreatedDate,CreatedBy")] SubInventory subInventory)
         {
-            
+            if (BLL.SubInventory.Instance.getDbSet().Any(x => x.name.ToLower() == subInventory.name.ToLower()))
+            {
+                ModelState.AddModelError("name", "This User is already in use OR In disactivate Mode");
+            }
+
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if (BLL.SubInventory.Instance.getDbSet().Any(x => x.name.ToLower() == subInventory.name.ToLower()))
-                    {
-                        ModelState.AddModelError("name", "This User is already in use");
-                    }
-
                     subInventory.CreatedDate = DateTime.Now;
                     subInventory.CreatedBy = ((Model.User)Session["User"]).ID;
+
                     BLL.SubInventory.Instance.Add(subInventory);
 
                     return RedirectToAction("Index");
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    errorLog.UserID = ((Model.User)Session["User"]).ID;
-                    errorLog.CreatedDate = DateTime.Now;
-                    errorLog.errorMsg = ex.Message;
+                    GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
                     return View();
 
-                }           
+                }
 
             }
             return View();
@@ -125,9 +119,7 @@ namespace OTS.Controllers
             }
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
                 return View();
 
             }
@@ -142,7 +134,7 @@ namespace OTS.Controllers
             {
                 if (BLL.SubInventory.Instance.getDbSet().Any(x => x.name.ToLower() == subInventory.name.ToLower() && x.InventoryID != subInventory.InventoryID))
                 {
-                    ModelState.AddModelError("name", "This User is already in use");
+                    ModelState.AddModelError("name", "This User is already in use OR In disactivate Mode");
                 }
 
                 subInventory.ModifiedBy = ((Model.User)Session["User"]).ID;
@@ -155,33 +147,29 @@ namespace OTS.Controllers
 
                 return View();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
                 return View();
 
             }
         }
 
 
-        
+
         [HttpGet]
         [ActionName("Delete")]
         public ActionResult Delete_Get(int id)
-        {
+{
             try
             {
                 SubInventory subInventory = BLL.SubInventory.Instance.SelectOne(id);
                 return View(subInventory);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
-                return View();
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
+                return RedirectToAction("Index");
 
             }
         }
@@ -197,11 +185,9 @@ namespace OTS.Controllers
 
                 return RedirectToAction("Index");
             }
-           catch (Exception ex)
+            catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID); ;
                 return View();
 
             }

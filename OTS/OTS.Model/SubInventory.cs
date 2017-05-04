@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
+
 
 namespace OTS.Model
 {
@@ -17,6 +19,7 @@ namespace OTS.Model
         [Required(ErrorMessage = "This field Required")]
         public int InventoryID { get; set; }
         public virtual Inventory inventory { get; set; }
+//        public List<SelectListItem> Inventories { get; set; }
 
         [Required(ErrorMessage = "This field Required")]
         public string name { get; set; }

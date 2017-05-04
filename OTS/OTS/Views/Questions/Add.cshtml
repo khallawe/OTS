@@ -24,20 +24,14 @@
 
 <h3>Add Question</h3>
 <br/>
-@*@Html.Label("inventorySelect", "Category ",new { @Class=""})*@
 <select id="inventorySelect" ></select><br/>
-@*@Html.Label("inventorySelect", "SubCategory", new { @Class = "" })*@
-<select id="subInventorySelect"></select>
-   
+<select id="subInventorySelect" required="required"></select>
 <br/>
-@*@Html.Label("QuestionText", "Add Question")*@
 @Html.TextArea("QuestionText",null, new { cols = 40, @class = "form-control" })
 <br />
 
 <div class="row">
-    @*<div class="col-md-1">
-        @Html.Label("AnswerText", "Answer Text")
-    </div>*@
+
     <div class="col-md-5">
         @Html.TextBox("AnswerText", null, new { @class = "form-control" })
     </div>
@@ -57,13 +51,7 @@
 <table id="tblAnswers" class="table table-bordered table-striped" style="margin-top: 50px; width: 50%;">
     <thead id="tblHeader">
         </thead>
-        @*<tr class="answer">
-                <td style="display: none" class="answer-id">1</td>
-                <td class="answer-text">First Answer</td>
-                <td class="answer-delete">
-                    <input type="button" id="btnDeleteAnswer" class="btn btn-primary" value="Delete Answer" />
-                </td>
-            </tr>*@
+
 </table>
 
 
@@ -111,6 +99,7 @@
                     contentType: "application/json; charset=utf-8;",
                     success: function (data) {
                         // $("#inventoryData").html("");
+                      //  alert();
                         subInventoryDDl.empty();
                         subInventoryDDl.append($('<option></option>').val(-1).html('Select SubCategory'));
                         subInventoryDDl.prop('disabled', false);
@@ -254,19 +243,28 @@
                 $.ajax({
                     url: '@Url.Action("Add","Questions")',
                     type: "POST",
-                    dataType: 'json',
-                    data: JSON.stringify(data),
+                    dataType: 'JSON',
                     contentType: "application/json; charset=utf-8;",
-                    success: function(data) {
+                    data: JSON.stringify(data),
+                    success: function (data) {
+                        clear();
                         alert("success");
                     }
                 });
 
 
             } else {
-                alert("Please Add Question Text");
+                alert("Please Add Valid Data!");
             }
         });
     });
+
+
+    function clear()
+    {
+        alert("alert")
+        $("#QuestionText").empty();
+        $("#AnswerText").empty();
+        $("#tblAnswers").empty();
+    }
 </script>
-<script type=""

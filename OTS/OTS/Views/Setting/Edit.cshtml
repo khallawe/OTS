@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.Label("Exam Time", htmlAttributes: new { @class = "control-label col-md-2 leftAlign" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExamTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ExamTime, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.ExamTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MaxQuestionsInSubInventories, htmlAttributes: new { @class = "control-label col-md-2 leftAlign" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MaxQuestionsInSubInventories, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MaxQuestionsInSubInventories, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.MaxQuestionsInSubInventories, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MinSubInventories, htmlAttributes: new { @class = "control-label col-md-2 leftAlign" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MinSubInventories, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MinSubInventories, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.MinSubInventories, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,7 +52,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MaxSubInventories, htmlAttributes: new { @class = "control-label col-md-2 leftAlign" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MaxSubInventories, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MaxSubInventories, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.MaxSubInventories, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -60,7 +60,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RandomLength, htmlAttributes: new { @class = "control-label col-md-2 leftAlign" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RandomLength, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.RandomLength, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.RandomLength, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -68,7 +68,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.QuestionGrades, htmlAttributes: new { @class = "control-label col-md-2 leftAlign" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.QuestionGrades, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.QuestionGrades, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.QuestionGrades, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -76,7 +76,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ValidTimeAccess, htmlAttributes: new { @class = "control-label col-md-2 leftAlign" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ValidTimeAccess, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ValidTimeAccess, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.ValidTimeAccess, "", new { @class = "text-danger" })
             </div>
         </div>

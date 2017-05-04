@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using OTS.Model;
 using OTS.Authentication;
+using OTS.code;
 
 namespace OTS.Controllers
 {
     [AuthenticateAdminSession]
     public class SettingController : Controller
     {
-        ErrorLog errorLog = new ErrorLog();
+        
 
 
 
@@ -25,10 +26,7 @@ namespace OTS.Controllers
             }
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
-                BLL.ErrorLog.Instance.Add(errorLog);
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
                 return View();
 
             }
@@ -47,11 +45,8 @@ namespace OTS.Controllers
             }
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
-                BLL.ErrorLog.Instance.Add(errorLog);
-                return View();
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
+                return RedirectToAction("Index");
 
             }
 
@@ -77,11 +72,8 @@ namespace OTS.Controllers
             }
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
-                BLL.ErrorLog.Instance.Add(errorLog);
-                return View();
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
+                return View(setting);
 
             }
         }

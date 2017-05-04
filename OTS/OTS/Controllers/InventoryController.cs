@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OTS.code;
 
 
 
@@ -16,31 +17,27 @@ namespace OTS.Controllers
     {
         
 
-        ErrorLog errorLog = new ErrorLog();
+        
 
         // GET: Inventory
         public ActionResult Index()
         {
             try
             {
-
                 List<Inventory> inventories = BLL.Inventory.Instance.SelectAll();
 
                 return View(inventories);
             }
             catch(Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
                 return View();
             }
         }
 
         // GET: Inventory/Details/5
         public ActionResult Details(int id)
-        {
-            
+        {           
             return View();
         }
 
@@ -57,11 +54,12 @@ namespace OTS.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Exclude = "CreatedDate,CreatedBy")] Inventory inventory)
         {
+
             try
             {
                 if (BLL.Inventory.Instance.getDbSet().Any(x => x.name.ToLower() == inventory.name.ToLower()))
                 {
-                    ModelState.AddModelError("name", "This User is already in use");
+                    ModelState.AddModelError("name", "This User is already in use OR In disactivate Mode ");
                 }
 
                 if (ModelState.IsValid)
@@ -69,17 +67,14 @@ namespace OTS.Controllers
                     inventory.CreatedDate = DateTime.Now;
                     inventory.CreatedBy = ((Model.User)Session["User"]).ID;
                     int res= BLL.Inventory.Instance.Add(inventory);
-                   return  RedirectToAction("Index");
+                    return  RedirectToAction("Index");
                 }
                 return View();
             }
 
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
-
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
                 return View();
             }
 
@@ -97,9 +92,7 @@ namespace OTS.Controllers
             }
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
 
                 return View();
             }
@@ -130,9 +123,7 @@ namespace OTS.Controllers
 
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
 
                 return View();
             }
@@ -144,25 +135,33 @@ namespace OTS.Controllers
         public ActionResult Delete(int id)
         {
             Inventory inventory = BLL.Inventory.Instance.SelectOne(id);
-            return View(inventory);
+            if (inventory != null)
+            {
+                return View(inventory);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+             
+            }
         }
+
+
         // POST: Inventory/Delete/5
         [HttpPost]
         public ActionResult Delete(Inventory inventory)
         {
             try
             {
-                BLL.Inventory.Instance.Delete(inventory.InventoryID);
+                int x=BLL.Inventory.Instance.Delete(inventory.InventoryID);
 
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
 
-                return View();
+                return View(inventory);
             }
         }
     }

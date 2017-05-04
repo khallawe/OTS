@@ -8,38 +8,52 @@ namespace OTS.DAL
 {
     class Setting : ISetting
     {
-        OTSContext db = new OTSContext();
+        
 
         public IDbSet<Model.Setting> getDbSet()
         {
+            OTSContext db = new OTSContext();
             return db.SettingSet;
         }
 
         public List<Model.Setting> SelectAll()
         {
-            return db.SettingSet.ToList();
+            List<Model.Setting> data;
+
+            using (var db = new OTSContext())
+            {
+                return data= db.SettingSet.ToList();
+            }
         }
 
         public Model.Setting SelectOne(int id)
         {
-            return db.SettingSet.Single(x => x.SettingID == id);
+            Model.Setting data;
+
+            using (var db = new OTSContext())
+            {
+                return data= db.SettingSet.Single(x => x.SettingID == id);
+            }
         }
 
         public int Update(Model.Setting setting)
         {
-            var original = db.SettingSet.Find(setting.SettingID);
-
-            if (original != null)
+            using (var db = new OTSContext())
             {
-                //db.Entry(original).CurrentValues.SetValues(setting);
-                //return db.SaveChanges();
-            }
-            //db.SettingSet.Attach(setting);
-            //db.Entry(setting).State = EntityState.Modified;
-            //db.SaveChanges();
-            
+                var original = db.SettingSet.Find(setting.SettingID);
 
-            return db.SaveChanges();
+                if (original != null)
+                {
+                    db.Entry(original).CurrentValues.SetValues(setting);
+                    return db.SaveChanges();
+                }
+                //db.SettingSet.Attach(setting);
+                //db.Entry(setting).State = EntityState.Modified;
+                //db.SaveChanges();
+
+
+                return db.SaveChanges();
+            }
 
         }
     }

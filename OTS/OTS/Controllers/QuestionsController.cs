@@ -6,13 +6,14 @@ using System.Web.Mvc;
 using OTS.DAL;
 using OTS.Model;
 using OTS.Authentication;
+using OTS.code;
 
 namespace OTS.Controllers
 {
     [AuthenticateAdminSession]
     public class QuestionsController : Controller
     {
-        ErrorLog errorLog = new ErrorLog();
+
        
         // GET: Questions
         public ActionResult Index()
@@ -26,10 +27,7 @@ namespace OTS.Controllers
             }
             catch (Exception ex)
             {
-                errorLog.UserID = ((Model.User)Session["User"]).ID;
-                errorLog.CreatedDate = DateTime.Now;
-                errorLog.errorMsg = ex.Message;
-                BLL.ErrorLog.Instance.Add(errorLog);
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
                 return RedirectToAction("Create");
             }
         }
@@ -38,45 +36,47 @@ namespace OTS.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            //TempData["InventoryID"] = new SelectList(BLL.Inventory.Instance.getDbSet(), "InventoryID", "name");
             return View();
         }
 
         [HttpPost]
         public JsonResult Add(Model.Question question)
         {
-            question.CreatedBy = ((Model.User)Session["User"]).ID;
-            question.CreatedDate= DateTime.Now;
-            foreach(Model.Answer item in question.Answers)
+            try
             {
-                item.CreatedDate = DateTime.Now;
-                item.CreatedBy = ((Model.User)Session["User"]).ID;
-            }
-           
-            DAL.OTSContext db = new DAL.OTSContext();
+                question.CreatedBy = ((Model.User)Session["User"]).ID;
+                question.CreatedDate = DateTime.Now;
+                foreach (Model.Answer item in question.Answers)
+                {
+                    item.CreatedDate = DateTime.Now;
+                    item.CreatedBy = ((Model.User)Session["User"]).ID;
+                }
 
-            if (ModelState.IsValid)
+             //   DAL.OTSContext db = new DAL.OTSContext();
+
+                if (ModelState.IsValid)
+                {
+                   BLL.Question.Instance.Add(question);
+                }
+
+                return Json(question);
+            }
+            catch (Exception ex)
             {
-                db.QuestionSet.Add(question);
-                db.SaveChanges();
+                GenerateErrorLog.AddLog(ex.Message, ((Model.User)Session["User"]).ID);
+                return Json(question);
             }
-               
-
-            
-
-
-            return Json(question);
         }
 
-        public ActionResult FillInventoryDDL()
-        {
-            List<Model.Inventory> inventory = BLL.Inventory.Instance.SelectAll();
-            return Json(
-                inventory.Select(x => new {
-                    InventoryID = x.InventoryID,
-                    name = x.name
-                }), JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult FillInventoryDDL()
+        //{
+        //    List<Model.Inventory> inventory = BLL.Inventory.Instance.SelectAll();
+        //    return Json(
+        //        inventory.Select(x => new {
+        //            InventoryID = x.InventoryID,
+        //            name = x.name
+        //        }), JsonRequestBehavior.AllowGet);
+        //}
 
 
     }

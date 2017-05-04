@@ -14,7 +14,7 @@ namespace OTS.Model
         [Required(ErrorMessage = "this field Required")]
         public string name { get; set; }
         [Required(ErrorMessage = "this field Required")]
-        public string description { get; set; }
+        public  string   description { get; set; }
         public virtual List<SubInventory> subInventories { get; set; }
 
     }

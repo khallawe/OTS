@@ -47,7 +47,7 @@ namespace OTS.DAL
             List<Model.Inventory> data;
             using (var db = new OTSContext())
             {
-                data = db.InventorySet.Where(x => x.IsActive == true).OrderByDescending(p => p.InventoryID).Take(200).ToList();
+                data = db.InventorySet.Where(x => x.IsActive == true).OrderByDescending(p => p.InventoryID).ToList();
             }
             return data;
 

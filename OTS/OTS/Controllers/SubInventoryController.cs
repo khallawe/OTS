@@ -2,6 +2,7 @@
 using OTS.code;
 using OTS.DAL;
 using OTS.Model;
+using OTS.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,12 +58,22 @@ namespace OTS.Controllers
         {
             try
             {
-                
-
-                TempData["InventoryID"] = new SelectList(BLL.Inventory.Instance.getDbSet().Where(x=>x.IsActive==true), "InventoryID", "name");
+                SubInventoryViewModels subInventoryViewModel = new SubInventoryViewModels();
 
 
-                return View();
+                subInventoryViewModel.Inventories = BLL.Inventory.Instance.SelectAll().Select(x => new SelectListItem
+                {
+                    Text = x.name,
+                    Value = x.InventoryID.ToString(),
+                   
+                }).ToList();
+
+               
+
+                // TempData["InventoryID"] = new SelectList(BLL.Inventory.Instance.getDbSet().Where(x=>x.IsActive==true), "InventoryID", "name");
+
+
+                return View(subInventoryViewModel);
             }
             catch (Exception ex)
             {

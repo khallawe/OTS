@@ -52,7 +52,7 @@ namespace OTS.DAL
                 return data= db.SubInventorySet.Include("Inventory")
                     .Where(x => x.inventory.IsActive == true && x.IsActive == true)
                     .OrderByDescending(p => p.SubInventoryID)
-                    .Take(200).ToList().ToList();
+                    .ToList().ToList();
             }
         }
 

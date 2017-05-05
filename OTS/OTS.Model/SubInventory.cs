@@ -18,16 +18,12 @@ namespace OTS.Model
 
         [Required(ErrorMessage = "This field Required")]
         public int InventoryID { get; set; }
-        public virtual Inventory inventory { get; set; }
-//        public List<SelectListItem> Inventories { get; set; }
-
         [Required(ErrorMessage = "This field Required")]
         public string name { get; set; }
-
         [Required(ErrorMessage = "This field Required")]
         public string description { get; set; }
 
-
+        public virtual Inventory inventory { get; set; }
         public List<Exam> exams { get; set; }
         public List<Question> questions { get; set; }
 

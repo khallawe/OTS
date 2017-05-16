@@ -76,7 +76,12 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                @{
+                                    if (!string.IsNullOrEmpty(ViewBag.Error))
+                                    {
+                                        <label class="alert-danger">@ViewBag.Error</label>
+                                    }
+                                }
 
                                 <div class="panel-footer">
                                     <div class="clearfix">

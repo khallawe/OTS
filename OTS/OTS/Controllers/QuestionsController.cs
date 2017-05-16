@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using OTS.DAL;
 using OTS.Model;
 using OTS.Authentication;
+using OTS.Helper.ExportImport;
 
 namespace OTS.Controllers
 {
@@ -33,7 +34,42 @@ namespace OTS.Controllers
                 return RedirectToAction("Create");
             }
         }
+        public ActionResult ExportXlsx()
+        {
+            try
+            {
+                ExportManager exportManager = new ExportManager();
+                var bytes = exportManager.ExportQuestionsAnswersToXlsx(BLL.Answer.Instance.SelectAll().OrderBy(x => x.QuestionID));
 
+                return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "questionsanswers.xlsx");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult ImportFromXlsx()
+        {
+            try
+            {
+                ImportManager importManager = new ImportManager();
+                var file = Request.Files["importexcelfile"];
+                if (file != null && file.ContentLength > 0)
+                {
+                    importManager.ImportQuestionsAnswersFromXlsx(file.InputStream, ((Model.User)Session["User"]).ID);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception exc)
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
         [HttpGet]
         public ActionResult Add()

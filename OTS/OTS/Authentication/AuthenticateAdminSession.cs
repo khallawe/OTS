@@ -40,7 +40,37 @@ namespace OTS.Authentication
 
         }
     }
+    public class AuthenticateStudentSession : ActionFilterAttribute
+    {
+
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            try
+            {
+                var session = filterContext.HttpContext.Session;
+                var userSession = session["Student"] as Student;
+                if (userSession.ID > 0)
+                {
+                    session["Name"] = userSession.studentName;
+                    return;
+                }
 
 
-    
+                //Redirect to login.
+                var redirectTarget = new RouteValueDictionary { { "action", "StudentLogin" }, { "controller", "Login" } };
+                filterContext.Result = new RedirectToRouteResult(redirectTarget);
+            }
+            catch (Exception)
+            {
+
+                var redirectTarget = new RouteValueDictionary { { "action", "StudentLogin" }, { "controller", "Login" } };
+                filterContext.Result = new RedirectToRouteResult(redirectTarget);
+
+            }
+
+        }
+    }
+
+
+
 }

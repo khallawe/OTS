@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace OTS.IDAL
 {
-    interface IAnswer
+    public interface IAnswer
     {
-        int Add(IAnswer question);
-        int Update(IAnswer question);
+        int Add(Answer question);
+        int Update(Answer question);
         int Delete(int questionID);
         Answer SelectOne(int id);
         List<Answer> Search(string key);

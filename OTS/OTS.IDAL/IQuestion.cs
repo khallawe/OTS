@@ -9,14 +9,15 @@ namespace OTS.IDAL
 {
    public interface IQuestion
     {
-        int Add(IQuestion question);
-        int Update(IQuestion question);
+        int Add(Question question);
+        int Update(Question question);
         int Delete(int id);
         Question SelectOne(int id);
         List<Question> SelectAll();   
         List<Question> Search(string key);
 
         List<Question> SelectBySubInventory(int subinventoryId);
+        List<Question> SelectRandomBySubInventory(int subinventoryId);
         List<Question> SelectByExam(int examID);
 
 

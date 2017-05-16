@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -80,6 +84,14 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -138,6 +150,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -208,7 +221,10 @@
     <Compile Include="Authentication\AuthenticateAdminSession.cs" />
     <Compile Include="code\GenerateErrorLog.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArchivesController.cs" />
     <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\ExamController.cs" />
+    <Compile Include="Controllers\GenerateExamController.cs" />
     <Compile Include="Controllers\GradingCriteriaController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -217,8 +233,10 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\SetSessionController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\StudentHomeController.cs" />
     <Compile Include="Controllers\SubInventoryAPIController.cs" />
     <Compile Include="Controllers\SubInventoryController.cs" />
     <Compile Include="Controllers\textController.cs" />
@@ -226,7 +244,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ImportExport\ExportManager.cs" />
+    <Compile Include="ImportExport\Help\PropertyByName.cs" />
+    <Compile Include="ImportExport\Help\PropertyManager.cs" />
+    <Compile Include="ImportExport\ImportManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ArchivesViewModel.cs" />
+    <Compile Include="Models\ExamQuestionModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\QuestionAnswer.cs" />
@@ -330,10 +354,24 @@
     <Content Include="Views\Setting\Index.cshtml" />
     <Content Include="Views\Questions\Add.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
+    <Content Include="Views\Exam\A.cshtml" />
+    <Content Include="Views\Login\StudentLogin.cshtml" />
+    <Content Include="Views\Shared\_LayoutStudent.cshtml" />
+    <Content Include="Views\Student\Assessment.cshtml" />
+    <Content Include="Views\Archives\Create.cshtml" />
+    <Content Include="Views\Archives\Details.cshtml" />
+    <Content Include="Views\Archives\Index.cshtml" />
+    <Content Include="Views\Exam\StartExam.cshtml" />
+    <Content Include="Views\StudentHome\Index.cshtml" />
+    <Content Include="Views\Exam\test.cshtml" />
+    <Content Include="Views\Exam\QuestionsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\" />
+    <Folder Include="Views\GenerateExam\" />
+    <Folder Include="Views\SetSession\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

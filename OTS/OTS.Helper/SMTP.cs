@@ -12,7 +12,7 @@ namespace OTS.Helper
 {
     public class SMTP
     {
-        public void SendEmail(string to, string title, string msg)
+        public static void SendEmail(string to, string title, StringBuilder msg)
         {
 
             var email = new SendEmailThread();
@@ -25,10 +25,10 @@ namespace OTS.Helper
         
         
     }
-    public class SendEmailThread
+    class SendEmailThread
     {
         public string to;
-        public string msg;
+        public StringBuilder msg;
         public string title;
         public void SendEmail()
         {

@@ -43,6 +43,10 @@ namespace OTS.BLL
         {
             return dal.SelectOne(id);
         }
+        public Model.Student SelectByAccessCode(string accessCode)
+        {
+            return dal.SelectByAccessCode(accessCode);
+        }
 
         public int Update(Model.Student user)
         {

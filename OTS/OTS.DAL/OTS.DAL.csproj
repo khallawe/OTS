@@ -50,13 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Answer.cs" />
     <Compile Include="ErrorLog.cs" />
+    <Compile Include="Exam.cs" />
     <Compile Include="GradingCriteria.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Inventory.cs" />
-    <Compile Include="Migrations\201705010740481_Initial.cs" />
-    <Compile Include="Migrations\201705010740481_Initial.Designer.cs">
-      <DependentUpon>201705010740481_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201705091544151_initial_migration.cs" />
+    <Compile Include="Migrations\201705091544151_initial_migration.Designer.cs">
+      <DependentUpon>201705091544151_initial_migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OTSContext.cs" />
@@ -86,8 +88,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705010740481_Initial.resx">
-      <DependentUpon>201705010740481_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705091544151_initial_migration.resx">
+      <DependentUpon>201705091544151_initial_migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

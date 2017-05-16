@@ -13,7 +13,6 @@ namespace OTS.Model
         public string QuestionText { get; set; }
         public virtual SubInventory SubInventory { get; set; }
         public int SubInventoryID { get; set; }
-       // public int numberOfAnswers { get; set; }
         public virtual List<Answer> Answers { get; set; }
         public virtual List<Exam> Exams { get; set; }
 

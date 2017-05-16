@@ -1,4 +1,5 @@
 ﻿using OTS.Authentication;
+using OTS.Helper.ExportImport;
 using OTS.Model;
 using System;
 using System.Collections.Generic;
@@ -137,8 +138,43 @@ namespace OTS.Controllers
                 return View();
             }
         }
-        
-       
+
+        public ActionResult ExportXlsx()
+        {
+            try
+            {
+                ExportManager exportManager = new ExportManager();
+                var bytes = exportManager.ExportInventoriesToXlsx(BLL.Inventory.Instance.SelectAll());
+
+                return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "inventories.xlsx");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult ImportFromXlsx()
+        {
+            try
+            {
+                ImportManager importManager = new ImportManager();
+                var file = Request.Files["importexcelfile"];
+                if (file != null && file.ContentLength > 0)
+                {
+                    importManager.ImportInventoriesFromXlsx(file.InputStream, ((Model.User)Session["User"]).ID);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception exc)
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
         [HttpGet]
         public ActionResult Delete(int id)

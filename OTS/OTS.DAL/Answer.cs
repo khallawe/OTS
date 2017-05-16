@@ -32,7 +32,7 @@ namespace OTS.DAL
 
         public List<Model.Answer> SelectAll()
         {
-            throw new NotImplementedException();
+            return db.AnswerSet.ToList();
         }
 
         public List<Model.Answer> SelectByQuestionID(int questionID)
@@ -55,8 +55,9 @@ namespace OTS.DAL
             Model.Answer oldAnswer = db.AnswerSet.SingleOrDefault(x => x.AnswerID == answer.AnswerID);
             oldAnswer.ModifiedBy = answer.ModifiedBy;
             oldAnswer.ModifiedDate = answer.ModifiedDate;
-            oldAnswer.answer = answer.answer;
-            oldAnswer.isCorrect = answer.isCorrect;
+            oldAnswer.AnswerText = answer.AnswerText;
+            oldAnswer.IsCorrect = answer.IsCorrect;
+            oldAnswer.IsActive = answer.IsActive;
             return db.SaveChanges();
         }
     }

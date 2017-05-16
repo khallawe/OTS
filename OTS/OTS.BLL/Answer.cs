@@ -49,7 +49,14 @@ namespace OTS.BLL
 
         public Model.Answer SelectOne(int id)
         {
-            return dal.SelectOne(id);
+            try
+            {
+                return dal.SelectOne(id);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public int Update(Model.Answer answer)

@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace OTS.IDAL
 {
-    interface IExam
+    public interface IExam
     {
-        int Add(IExam exam);
-        int Update(IExam exam);
+        int Add(Exam exam);
+        int Update(Exam exam);
         int Delete(int id);
         Exam SelectOne(int id);
         List<Exam> SelectAll();
         List<Exam> Search(string key);
-
+        bool IsAccessKeyExist(string accessKey);
 
         List<Exam> SelectByUserID(int userId);
         Exam SelectByAccessCode(string accessCode);

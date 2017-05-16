@@ -1,0 +1,72 @@
+﻿@model IEnumerable<OTS.Model.Exam>
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-default" id="panel-inline">
+                <div class="panel-heading">
+                    <h2>Student Exam List</h2>
+                    <div class="panel-ctrls"></div>
+                </div>
+                <div class="panel-body panel-no-padding">
+
+                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" id="editable">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Is taken</th>
+                                <th>Grade</th>
+                                <th>Date Taken</th>
+                                <th>View Report</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.studentId)
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (item.isTaken)
+                                            {
+                                                @Html.Label("True")
+                                            }
+                                            else
+                                            {
+                                                @Html.Label("False")
+                                            }
+                                        }
+                                       
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.grade)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.dateTaken)
+                                    </td>
+
+
+                                    <td>
+
+                                        @Html.ActionLink("Report", "Create", new { id = item.ID })
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table><!--end table-->
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

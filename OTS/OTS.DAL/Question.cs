@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using OTS.IDAL;
 using OTS.Model;
+using System.Data.Entity;
 
 namespace OTS.DAL
 {
     class Question : IQuestion
     {
-        public int Add(IQuestion question)
+        public int Add(Model.Question question)
         {
-            throw new NotImplementedException();
+            OTSContext db = new OTSContext();
+            db.QuestionSet.Add(question);
+            return db.SaveChanges();
         }
 
         public int Delete(int id)
@@ -43,12 +46,28 @@ namespace OTS.DAL
 
         public Model.Question SelectOne(int id)
         {
-            throw new NotImplementedException();
+            OTSContext db = new OTSContext();
+            return db.QuestionSet.Single(x => x.QuestionID == id);
         }
 
-        public int Update(IQuestion question)
+        public List<Model.Question> SelectRandomBySubInventory(int subinventoryId)
         {
-            throw new NotImplementedException();
+            OTSContext db = new OTSContext();
+            List<Model.Question> allQuestion = db.QuestionSet.Include("Answers").Where(x => x.SubInventoryID == subinventoryId).ToList();
+            List < Model.Question > list = allQuestion.OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+            return list;
+        }
+
+        public int Update(Model.Question question)
+        {
+            OTSContext db = new OTSContext();
+            Model.Question questionToUpdate = db.QuestionSet.SingleOrDefault(x => x.QuestionID == question.QuestionID);
+            questionToUpdate.ModifiedBy = question.ModifiedBy;
+            questionToUpdate.ModifiedDate = question.ModifiedDate;
+            questionToUpdate.SubInventoryID = question.SubInventoryID;
+            questionToUpdate.QuestionText = question.QuestionText;
+            questionToUpdate.IsActive = question.IsActive;
+            return db.SaveChanges();
         }
     }
 }

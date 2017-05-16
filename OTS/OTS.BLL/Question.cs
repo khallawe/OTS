@@ -18,9 +18,9 @@ namespace OTS.BLL
         /// </summary>
         public static Question Instance { get { Question Instance = new Question(); return Instance; } }
 
-        public int Add(IQuestion question)
+        public int Add(Model.Question question)
         {
-            throw new NotImplementedException();
+            return dal.Add(question);
         }
 
         public int Delete(int id)
@@ -40,22 +40,34 @@ namespace OTS.BLL
 
         public List<Model.Question> SelectByExam(int examID)
         {
-            throw new NotImplementedException();
+            return dal.SelectByExam(examID);
         }
 
         public List<Model.Question> SelectBySubInventory(int subinventoryId)
         {
-            throw new NotImplementedException();
+            return dal.SelectBySubInventory(subinventoryId);
         }
 
         public Model.Question SelectOne(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return dal.SelectOne(id);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public int Update(IQuestion question)
+        public List<Model.Question> SelectRandomBySubInventory(int subinventoryId)
         {
-            throw new NotImplementedException();
+            return dal.SelectRandomBySubInventory(subinventoryId);
+        }
+
+        public int Update(Model.Question question)
+        {
+            return dal.Update(question);
         }
     }
 }

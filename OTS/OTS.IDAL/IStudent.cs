@@ -15,6 +15,7 @@ namespace OTS.IDAL
         int Update(Student user);
         int Delete(int id);
         Student SelectOne(int id);
+        Student SelectByAccessCode(string accessCode);
         List<Student> Search(string key);
         List<Student> SelectAll();
         #endregion

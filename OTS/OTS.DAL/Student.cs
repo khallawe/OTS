@@ -58,6 +58,11 @@ namespace OTS.DAL
         {
             return db.StudentSet.FirstOrDefault(x => x.ID == id);
         }
+        public Model.Student SelectByAccessCode(string accessCode)
+        {
+            int studentID = ((Model.Exam)db.ExamSet.FirstOrDefault(x => x.accessId == accessCode)).studentId;
+            return db.StudentSet.FirstOrDefault(x => x.ID == studentID);
+        }
 
         public int Update(Model.Student user)
         {

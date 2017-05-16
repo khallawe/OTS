@@ -157,11 +157,7 @@ namespace OTS.Controllers
             }
         }
         
-        public void sendEmail()
-        {
-            SMTP email = new SMTP();
-            email.SendEmail("mabuhussein03@gmail.com", "msg title", "msg contant");
-        }
+        
         public string Random()
         {
             return RandomCode.RandomString(25);

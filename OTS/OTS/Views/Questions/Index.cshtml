@@ -8,6 +8,12 @@
 
 <p>
     @Html.ActionLink("Create New", "Add")
+    <button type="button" name="exportexcel">
+        @Html.ActionLink("Export to Excel", "ExportXlsx")
+    </button>
+    <button type="button" name="importexcel" data-toggle="modal" data-target="#importexcel-window">
+        Import from Excel
+    </button>
 </p>
 
 
@@ -67,3 +73,44 @@
 
 </div>
 
+<div id="importexcel-window" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="importexcel-window-title">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="importexcel-window-title">Import From Excel</h4>
+            </div>
+            @using (Html.BeginForm("ImportFromXlsx", "Questions", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <div class="label-wrapper">
+                                <label class="control-label">
+                                    File
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="file" id="importexcelfile" name="importexcelfile" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="import">
+                            Import From Excel
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#import").click(function () {
+        var fileExtension = ['xlsx', 'xls'];
+        if ($.inArray($("#importexcelfile").val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Only formats are allowed : " + fileExtension.join(', '));
+            return false;
+        }
+    });
+</script>

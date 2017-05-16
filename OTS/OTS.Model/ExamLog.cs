@@ -9,8 +9,11 @@ namespace OTS.Model
     {
         [Key]
         public int ID { get; set; }
-        public Exam exam { get; set; }
-        public Question question { get; set; }
-        public Answer selectedAnswer { get; set; }
+        public int examId { get; set; }
+        public virtual Exam exam { get; set; }
+        public int questionId { get; set; }
+        public virtual Question question { get; set; }
+        public int selectedAnswerId { get; set; }
+        public virtual Answer selectedAnswer { get; set; }
     }
 }

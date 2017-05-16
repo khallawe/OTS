@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewBag.Title = "A";
+}
+<link type="text/css" href="/assets/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">        <!-- Font Awesome -->
+<link type="text/css" href="/assets/css/styles.css" rel="stylesheet">                                     <!-- Core CSS with all styles -->
+
+<link type="text/css" href="/assets/plugins/jstree/dist/themes/avenger/style.min.css" rel="stylesheet">    <!-- jsTree -->
+<link type="text/css" href="/assets/plugins/codeprettifier/prettify.css" rel="stylesheet">                <!-- Code Prettifier -->
+<link type="text/css" href="/assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
+<!--[if lt IE 9]>
+    <link type="text/css" href="/assets/css/ie8.css" rel="stylesheet">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/charts-flot/excanvas.min.js"></script>
+    <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!-- The following CSS are included as plugins and can be removed if unused-->
+<div class="infobar-offcanvas">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h2>Simple Wizard</h2>
+                    <div class="options">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#domwizard" data-toggle="tab"><i class="fa fa-desktop"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <p>You can turn any simple form into a wizard with just one line of code! See it in action...</p>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="domwizard">
+                            <form action="#" id="basicwizard" class="form-horizontal">
+                                <fieldset title="1">
+                                    <legend>No Validation</legend>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">User Name</label>
+                                        <div class="col-md-6">
+                                            <input type="text" placeholder="username" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Email Address</label>
+                                        <div class="col-md-6">
+                                            <input type="text" placeholder="example@address.com" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Website</label>
+                                        <div class="col-md-6">
+                                            <input type="text" placeholder="http://address.com" class="form-control">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="2">
+                                    <legend>Just Text</legend>
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Lorem Ipsum</label>
+                                        <div class="col-md-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, quis autem deleniti animi eum a eaque sint voluptatibus labore possimus accusantium molestias magnam cum officiis qui neque minima assumenda facere aut repellat delectus. Soluta incidunt pariatur natus voluptatum voluptatibus culpa blanditiis. Inventore, repellendus, at veniam magnam quisquam necessitatibus modi est qui deserunt. Dicta, excepturi, iusto, maiores perferendis rem officiis est voluptas possimus laudantium fugit veritatis!</p>
+                                            <p>By clicking Finish you agree that you accept the Terms &amp; Conditions</p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="3">
+                                    <legend>Just Text</legend>
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Lorem Ipsum</label>
+                                        <div class="col-md-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, quis autem deleniti animi eum a eaque sint voluptatibus labore possimus accusantium molestias magnam cum officiis qui neque minima assumenda facere aut repellat delectus. Soluta incidunt pariatur natus voluptatum voluptatibus culpa blanditiis. Inventore, repellendus, at veniam magnam quisquam necessitatibus modi est qui deserunt. Dicta, excepturi, iusto, maiores perferendis rem officiis est voluptas possimus laudantium fugit veritatis!</p>
+                                            <p>By clicking Finish you agree that you accept the Terms &amp; Conditions</p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="4">
+                                    <legend>Just Text</legend>
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Lorem Ipsum</label>
+                                        <div class="col-md-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, quis autem deleniti animi eum a eaque sint voluptatibus labore possimus accusantium molestias magnam cum officiis qui neque minima assumenda facere aut repellat delectus. Soluta incidunt pariatur natus voluptatum voluptatibus culpa blanditiis. Inventore, repellendus, at veniam magnam quisquam necessitatibus modi est qui deserunt. Dicta, excepturi, iusto, maiores perferendis rem officiis est voluptas possimus laudantium fugit veritatis!</p>
+                                            <p>By clicking Finish you agree that you accept the Terms &amp; Conditions</p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="5">
+                                    <legend>Just Text</legend>
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Lorem Ipsum</label>
+                                        <div class="col-md-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, quis autem deleniti animi eum a eaque sint voluptatibus labore possimus accusantium molestias magnam cum officiis qui neque minima assumenda facere aut repellat delectus. Soluta incidunt pariatur natus voluptatum voluptatibus culpa blanditiis. Inventore, repellendus, at veniam magnam quisquam necessitatibus modi est qui deserunt. Dicta, excepturi, iusto, maiores perferendis rem officiis est voluptas possimus laudantium fugit veritatis!</p>
+                                            <p>By clicking Finish you agree that you accept the Terms &amp; Conditions</p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="6">
+                                    <legend>Just Text</legend>
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Lorem Ipsum</label>
+                                        <div class="col-md-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, quis autem deleniti animi eum a eaque sint voluptatibus labore possimus accusantium molestias magnam cum officiis qui neque minima assumenda facere aut repellat delectus. Soluta incidunt pariatur natus voluptatum voluptatibus culpa blanditiis. Inventore, repellendus, at veniam magnam quisquam necessitatibus modi est qui deserunt. Dicta, excepturi, iusto, maiores perferendis rem officiis est voluptas possimus laudantium fugit veritatis!</p>
+                                            <p>By clicking Finish you agree that you accept the Terms &amp; Conditions</p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="7">
+                                    <legend>Just Text</legend>
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Lorem Ipsum</label>
+                                        <div class="col-md-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, quis autem deleniti animi eum a eaque sint voluptatibus labore possimus accusantium molestias magnam cum officiis qui neque minima assumenda facere aut repellat delectus. Soluta incidunt pariatur natus voluptatum voluptatibus culpa blanditiis. Inventore, repellendus, at veniam magnam quisquam necessitatibus modi est qui deserunt. Dicta, excepturi, iusto, maiores perferendis rem officiis est voluptas possimus laudantium fugit veritatis!</p>
+                                            <p>By clicking Finish you agree that you accept the Terms &amp; Conditions</p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="8">
+                                    <legend>Just Text</legend>
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Lorem Ipsum</label>
+                                        <div class="col-md-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, quis autem deleniti animi eum a eaque sint voluptatibus labore possimus accusantium molestias magnam cum officiis qui neque minima assumenda facere aut repellat delectus. Soluta incidunt pariatur natus voluptatum voluptatibus culpa blanditiis. Inventore, repellendus, at veniam magnam quisquam necessitatibus modi est qui deserunt. Dicta, excepturi, iusto, maiores perferendis rem officiis est voluptas possimus laudantium fugit veritatis!</p>
+                                            <p>By clicking Finish you agree that you accept the Terms &amp; Conditions</p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="9">
+                                    <legend>Just Text</legend>
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Lorem Ipsum</label>
+                                        <div class="col-md-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, quis autem deleniti animi eum a eaque sint voluptatibus labore possimus accusantium molestias magnam cum officiis qui neque minima assumenda facere aut repellat delectus. Soluta incidunt pariatur natus voluptatum voluptatibus culpa blanditiis. Inventore, repellendus, at veniam magnam quisquam necessitatibus modi est qui deserunt. Dicta, excepturi, iusto, maiores perferendis rem officiis est voluptas possimus laudantium fugit veritatis!</p>
+                                            <p>By clicking Finish you agree that you accept the Terms &amp; Conditions</p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="10">
+                                    <legend>Just Text</legend>
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Lorem Ipsum</label>
+                                        <div class="col-md-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, quis autem deleniti animi eum a eaque sint voluptatibus labore possimus accusantium molestias magnam cum officiis qui neque minima assumenda facere aut repellat delectus. Soluta incidunt pariatur natus voluptatum voluptatibus culpa blanditiis. Inventore, repellendus, at veniam magnam quisquam necessitatibus modi est qui deserunt. Dicta, excepturi, iusto, maiores perferendis rem officiis est voluptas possimus laudantium fugit veritatis!</p>
+                                            <p>By clicking Finish you agree that you accept the Terms &amp; Conditions</p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="11">
+                                    <legend>Just Text</legend>
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Lorem Ipsum</label>
+                                        <div class="col-md-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, quis autem deleniti animi eum a eaque sint voluptatibus labore possimus accusantium molestias magnam cum officiis qui neque minima assumenda facere aut repellat delectus. Soluta incidunt pariatur natus voluptatum voluptatibus culpa blanditiis. Inventore, repellendus, at veniam magnam quisquam necessitatibus modi est qui deserunt. Dicta, excepturi, iusto, maiores perferendis rem officiis est voluptas possimus laudantium fugit veritatis!</p>
+                                            <p>By clicking Finish you agree that you accept the Terms &amp; Conditions</p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <input type="submit" class="finish btn-success btn" value="Submit" />
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- Load page level scripts-->
+
+<script type="text/javascript" src="/assets/plugins/form-validation/jquery.validate.min.js"></script>  					<!-- Validate Plugin -->
+<script type="text/javascript" src="/assets/plugins/form-stepy/jquery.stepy.js"></script>  								<!-- Stepy Plugin -->
+
+<script type="text/javascript" src="/assets/demo/demo-formwizard.js"></script>
+
+<!-- End loading page level scripts-->
+
+

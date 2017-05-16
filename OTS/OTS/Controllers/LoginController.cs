@@ -31,12 +31,18 @@ namespace OTS.Controllers
                     if (user.ID > 0)
                     {
                         Session["user"] = user;
+                        return RedirectToAction("Index", "Home");
                     }
-                    return RedirectToAction("Index", "Home");
+                    else
+                    {
+                        ViewBag.Error = "User Name Or Password is Not Correct ";
+                        return View();
+                    }
+                    
                 }
                 catch (Exception)
                 {
-
+                    ViewBag.Error = "User Name Or Password is Not Correct ";
                     return View();
                 }
                 
@@ -58,6 +64,43 @@ namespace OTS.Controllers
                 return RedirectToAction("Login");
             }
            
+        }
+        [HttpGet]
+        public ActionResult StudentLogin()
+        {
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult StudentLogin(string accessCode)
+        {
+            if (!string.IsNullOrEmpty(accessCode) )
+            {
+                try
+                {
+
+                    Student student = BLL.Student.Instance.SelectByAccessCode(accessCode);
+                    if (student.ID > 0)
+                    {
+                        Session["Student"] = student;
+                        Session["accessCode"] = accessCode;
+                        return RedirectToAction("Index", "StudentHome");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Access code is not correct";
+                        return View();
+                    }
+                }
+                catch (Exception)
+                {
+                    ViewBag.Error = "Access code is not correct ";
+                    return View();
+                }
+
+            }
+
+            return View();
         }
     }
 }

@@ -11,11 +11,12 @@ namespace OTS.Model
         [Key]
         public int ID { get; set; }
         public string accessId { get; set; }
-        public User  user { get; set; }
+        public int studentId { get; set; }
+        public virtual Student  student { get; set; }
         public List<SubInventory> chosenSubInventories { get; set; }
         public List<Question> questions { get; set; }
         public bool isTaken { get; set; }
         public string grade { get; set; }
-        public DateTime dateTaken { get; set; }
+        public DateTime? dateTaken { get; set; }
     }
 }

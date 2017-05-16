@@ -1,0 +1,160 @@
+﻿@model OTS.Models.ArchivesViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>OTS Report</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        body {
+            padding-top: 20px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+            margin-bottom: 20px;
+        }
+
+        .portfolio-item {
+            margin-bottom: 25px;
+        }
+
+        footer {
+            margin: 50px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Content -->
+    <div class="container" style="border:2px solid black;">
+        <div class="row">
+            <div class="col-lg-12">
+                <img class="img-responsive" src="/assets/img/mumheader.jpg" alt="">
+            </div>
+        </div>
+        <!-- /.row -->
+        <div style="border-top:2px solid; border-bottom:2px solid;">
+            <div class="row">
+                <div class="col-md-6 portfolio-item" style="margin-top:15px">
+                    <div class="col-md-9">Assessment Result for: @Model.Exam.student.studentName</div>
+                    <div class="col-md-3 col-md-push-6"><span>Date:@Model.Exam.CreatedDate.ToString("yyyy-MM-dd")</span></div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 portfolio-item">
+                    <div class="col-md-8">Subject:
+                    
+                    @foreach (var item in Model.Exam.chosenSubInventories)
+                    {
+                        @item.name <span> </span>
+
+                    }
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 portfolio-item">
+                    <div class="col-md-12">Client: Maharshi University Of Managment </div>
+
+                </div>
+            </div>
+            </div>
+                <!-- Projects Row -->
+                <div class="row">
+                    
+                    <div class="col-md-6 portfolio-item">
+                       <h2> Your Score: <span>@Model.Exam.grade</span></h2>
+                        <br/>
+                       <label class="control-label" for="Date"><span>@Model.Exam.student.studentName</span> <br/> <br /> has achieved an overall score of <span > @Model.Exam.grade </span> across all sub-skills in this subject.</label>
+                    
+                        <h3>Details: </h3>
+                        <ul class="">
+
+                            @foreach (var item in Model.Exam.chosenSubInventories)
+                            {
+                                <li>
+                                    @item.name
+
+                                </li>
+                            }
+                                   
+                                
+                         
+                        </ul>
+                    
+                    
+                    
+                    </div>
+                    
+                    <div class="col-md-6 portfolio-item">
+                        
+                        <table class="table col-md-6" style="margin-top:5px">
+                            <thead class="table col-md-6">
+                                <tr>
+                                    <th>Score  </th>
+                                    <th>Grading </th>
+                                </tr>
+                            </thead>
+                            <tbody class="table col-md-6">
+                                <tr class="danger"><td>NC</td><td>(0-69)</td></tr>
+                                <tr class="danger" "><td>C-</td><td>(70-72)</td></tr>
+                                <tr class="danger"><td>C </td><td>(73-77)</td></tr>
+                                <tr class="warning"><td>C+)</td><td>(78-79</td></tr>
+                                <tr class="warning"><td>B-</td><td>(80-82)</td></tr>
+                                <tr class="warning"><td>B </td><td>(83-87)</td></tr>
+                                <tr class="active"><td>B+</td><td>(88-89)</td></tr>
+                                <tr class="success"><td>A-</td><td>(90-92)</td></tr>
+                                <tr class="success"><td>A </td><td>(93-100)</td></tr>
+
+                            </tbody>
+
+
+                        </table>
+                      
+
+
+                    </div>
+                </div>
+                <!-- /.row -->
+                @*<div class="row">
+                    <div class="col-lg-12">
+                        content here
+                    </div>
+                </div>*@
+
+                <!-- Footer -->
+                <footer>
+                    <div class="row" style="border-top:2px solid">
+                        <div class="col-lg-12" style="margin-top:10px"">
+                            <p>
+                                MUM assessments are designed to meaure overall proficiency in a subject and depth of nowledge in specific sub-topics. This score report does  not provide a criterion-referenced interpretation, pass/fail score or standard of performance please nothe that test resuls, in isolation, are not pure predictors of success in employment or any given role. other indicators, such as prior experience, references and interviews, should be considered prior to any employment or buisness decisions.
+                            </p>
+                            <br/>
+                            <p style="text-align:center"> <span style="text-align:center">Copyright &copy; MUM 2017</span></p>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </footer>
+            </div>
+            <!-- /.container -->
+            <!-- jQuery -->
+            <script src="/assets/js/jquery.js"></script>
+            <!-- Bootstrap Core JavaScript -->
+            <script src="/assets/js/bootstrap.min.js"></script>
+</body>
+</html>
